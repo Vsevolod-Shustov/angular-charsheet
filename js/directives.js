@@ -1,1 +1,0 @@
-var csDirectives = angular.module('csDirectives', []);

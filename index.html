@@ -13,7 +13,52 @@
   <script src="js/services.js"></script>
   <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
-<body ng-controller="charCtrl">
-{{text}}
+<body ng-controller="characterCtrl">
+<div class="block">
+<table>
+  <tr>
+    <td>
+    <td>Value
+    <td>Mod
+    <td>Base
+    <td>Bonus
+  </tr>
+  <tr ng-repeat="attribute in character.attributes | toArray | orderBy:'index'">
+  <td>{{attribute.name | uppercase}}
+  <td>{{attribute.value||10}}
+  <td>{{attribute.mod||0}}
+  <td><input type="number" ng-model="attribute.basevalue" ng-change="update()">
+  <td><input type="number" ng-model="attribute.bonus" ng-change="update()">
+</tr>
+</table>
+</div>
+
+<div class="block">
+<table>
+  <tr>
+    <td>
+    <td>Attr
+    <td>Attr Bonus
+    <td>Value
+    <td>Bonus
+  </tr>
+  <tr ng-repeat="skill in character.skills">
+  <td>{{skill.name}}
+  <td>{{skill.attribute}}
+  <td>{{skill.attributeBonus}}
+  <td>{{skill.value}}
+  <td><input type="number" ng-model="skill.bonus" ng-change="skill.update()">
+</tr>
+</table>
+</div>
+
+<div id="footer">
+  <button type="submit" id="save-map-btn" class="btn btn-success" ng-click="saveCharacter()">Save Character</button>
+  <button type="submit" id="load-map-btn" class="btn btn-warning" ng-click="loadCharacter()">Load Character</button>
+  <button type="submit" id="load-map-btn" class="btn btn-warning" ng-click="character.skills.acrobatics.update()">update acrobatics</button>
+  <pre>
+  {{character | json}}
+  </pre>
+</div>
 </body>
 </html>

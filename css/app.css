@@ -1,3 +1,26 @@
 * {
   box-sizing:border-box;
 }
+
+td {
+  padding:1px 3px;
+  line-height:1em;
+  text-align:center;
+  border:1px solid gray;
+}
+input[type="number"] {
+  width:50px;
+  border:none;
+  text-align:center;
+  outline:none;
+}
+
+.block {
+  margin:10px;
+  float:left;
+}
+
+#footer {
+  clear:both;
+  margin:10px;
+}
