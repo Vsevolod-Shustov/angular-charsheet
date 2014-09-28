@@ -8,8 +8,16 @@ td {
   text-align:center;
   border:1px solid gray;
 }
+td:first-letter {
+  text-transform:uppercase;
+}
 input[type="number"] {
   width:50px;
+  border:none;
+  text-align:center;
+  outline:none;
+}
+input[type="text"] {
   border:none;
   text-align:center;
   outline:none;

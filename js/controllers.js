@@ -13,7 +13,6 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   //load character
   $scope.loadCharacter = function(){
     $scope.character = LocalStorageService.load('character');
-    console.log($scope.character);
   };
   
   function Attribute(name, index){
@@ -24,39 +23,39 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     this.index = index;
   };
   
-  /*Attribute.prototype.update = function(){
-    this.value = this.basevalue + this.bonus;
-    this.mod = parseInt((this.value - 10)/2);
-    console.log(this.name + " " + this.value + " " + this.mod);
-  };*/
+  $scope.character.attributes.strength = new Attribute('strength',1);
+  $scope.character.attributes.dexterity = new Attribute('dexterity',2);
+  $scope.character.attributes.constitution = new Attribute('constitution',3);
+  $scope.character.attributes.intelligence = new Attribute('intelligence',4);
+  $scope.character.attributes.wisdom = new Attribute('wisdom',5);
+  $scope.character.attributes.charisma = new Attribute('charisma',6);
   
-
-  $scope.character.attributes.str = new Attribute('str',1);
-  $scope.character.attributes.dex = new Attribute('dex',2);
-  $scope.character.attributes.con = new Attribute('con',3);
-  $scope.character.attributes.intl = new Attribute('int',4);
-  $scope.character.attributes.wis = new Attribute('wis',5);
-  $scope.character.attributes.cha = new Attribute('cha',6);
-  
-  /*function Skill(name, attribute){
+  function Skill(name, attribute){
     this.name = name;
     this.attribute = attribute;
     this.value = 0;
     this.bonus = 0;
-    /*this.attributeBonus = $scope.character.attributes[attribute].value;
-    this.update = function(){
-      this.value = this.bonus + this.attributeBonus;
-      console.log(this.name + " " + this.attribute + " " + this.value);
-    };
+    this.ranks = 0;
   };
   
-  $scope.character.skills.acrobatics = new Skill('Acrobatics','dex');
-  console.log($scope.character.skills.acrobatics);*/
+  $scope.addSkill = function(){
+    $scope.character.skills[$scope.addSkillForm.name.toLowerCase()] = new Skill($scope.addSkillForm.name.toLowerCase(),$scope.addSkillForm.attribute);
+    $scope.addSkillForm = {};
+  };
+  
   $scope.update = function(){
+    //attributes
     angular.forEach($scope.character.attributes, function(item){
       item.value = item.basevalue + item.bonus;
       item.mod = parseInt((item.value - 10)/2);
-      console.log(item.name + " " + item.value + " " + item.mod);
+    });
+    
+    //skills
+    angular.forEach($scope.character.skills, function(item){
+      item.statbonus = $scope.character.attributes[item.attribute].mod
+      item.value = item.ranks + item.statbonus + item.bonus;
     });
   };
+  
+  $scope.$watch('character', function(){$scope.update()},true);
 }]);

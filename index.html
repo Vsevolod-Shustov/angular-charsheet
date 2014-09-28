@@ -24,11 +24,11 @@
     <td>Bonus
   </tr>
   <tr ng-repeat="attribute in character.attributes | toArray | orderBy:'index'">
-  <td>{{attribute.name | uppercase}}
+  <td>{{attribute.name | uppercase | limitTo:3}}
   <td>{{attribute.value||10}}
   <td>{{attribute.mod||0}}
-  <td><input type="number" ng-model="attribute.basevalue" ng-change="update()">
-  <td><input type="number" ng-model="attribute.bonus" ng-change="update()">
+  <td><input type="number" ng-model="attribute.basevalue">
+  <td><input type="number" ng-model="attribute.bonus">
 </tr>
 </table>
 </div>
@@ -37,25 +37,35 @@
 <table>
   <tr>
     <td>
-    <td>Attr
-    <td>Attr Bonus
     <td>Value
+    <td>Attr
     <td>Bonus
+    <td>Ranks
   </tr>
-  <tr ng-repeat="skill in character.skills">
-  <td>{{skill.name}}
-  <td>{{skill.attribute}}
-  <td>{{skill.attributeBonus}}
-  <td>{{skill.value}}
-  <td><input type="number" ng-model="skill.bonus" ng-change="skill.update()">
-</tr>
+  <tr ng-repeat="skill in character.skills | toArray | orderBy:'name'">
+    <td>{{skill.name}}
+    <td>{{skill.value}}
+    <td>{{skill.attribute | uppercase | limitTo:3}} {{skill.statbonus||0}}
+    <td><input type="number" ng-model="skill.bonus">
+    <td><input type="number" ng-model="skill.ranks">
+  </tr>
+  <tr>
+    <td><input type="text" ng-model='addSkillForm.name'>
+    <td>
+    <td>
+      <select required ng-model="addSkillForm.attribute">
+        <option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">{{attribute.name | uppercase | limitTo:3}}</option>
+      </select>
+    <td>
+    <td>
+      <button type="submit" ng-click="addSkill()">Add Skill</button>
+  </tr>
 </table>
 </div>
 
 <div id="footer">
   <button type="submit" id="save-map-btn" class="btn btn-success" ng-click="saveCharacter()">Save Character</button>
   <button type="submit" id="load-map-btn" class="btn btn-warning" ng-click="loadCharacter()">Load Character</button>
-  <button type="submit" id="load-map-btn" class="btn btn-warning" ng-click="character.skills.acrobatics.update()">update acrobatics</button>
   <pre>
   {{character | json}}
   </pre>
