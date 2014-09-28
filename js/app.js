@@ -1,7 +1,9 @@
 "use strict";
 var csApp = angular.module('csApp', [
+  'ngRoute',
   'csControllers',
-  'csServices'
+  'csServices',
+  'csDirectives'
 ]);
 
 csApp.filter("toArray", function(){
@@ -12,4 +14,14 @@ csApp.filter("toArray", function(){
         });
         return result;
     };
+});
+
+csApp.config(function($routeProvider) {
+    $routeProvider.
+    when('/', {
+      templateUrl: 'partials/main.html'
+    }).
+    when('/skills', {
+      templateUrl: 'partials/skills.html'
+    });
 });

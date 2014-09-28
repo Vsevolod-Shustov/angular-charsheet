@@ -1,6 +1,12 @@
 * {
   box-sizing:border-box;
 }
+.row {
+  padding-top:15px;
+}
+button a {
+  text-decoration:none!important;
+}
 
 td {
   padding:1px 3px;
@@ -24,11 +30,10 @@ input[type="text"] {
 }
 
 .block {
-  margin:10px;
   float:left;
 }
 
 #footer {
   clear:both;
-  margin:10px;
+  margin:10px 0;
 }

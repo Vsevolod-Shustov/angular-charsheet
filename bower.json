@@ -9,6 +9,8 @@
     "angular": "1.2.x",
     "angular-route": "1.2.x",
     "angular-mocks": "*",
+    "jquery": "2.x.x",
+    "jquery-mousewheel": "3.x.x",
     "bootstrap": "3.x.x",
     "jasmine": "*",
     "karma": "*"

@@ -7,61 +7,22 @@
   <link rel="stylesheet" href="css/app.css"/>
   <script src="vendor/jquery/dist/jquery.min.js"></script>
   <script src="vendor/angular/angular.min.js"></script>
+  <script src="vendor/angular-route/angular-route.min.js"></script>
   <script src="js/app.js"></script>
   <script src="js/controllers.js"></script>
-  <!--<script src="js/directives.js"></script>-->
+  <script src="js/directives.js"></script>
   <script src="js/services.js"></script>
   <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
-<body ng-controller="characterCtrl">
-<div class="block">
-<table>
-  <tr>
-    <td>
-    <td>Value
-    <td>Mod
-    <td>Base
-    <td>Bonus
-  </tr>
-  <tr ng-repeat="attribute in character.attributes | toArray | orderBy:'index'">
-  <td>{{attribute.name | uppercase | limitTo:3}}
-  <td>{{attribute.value||10}}
-  <td>{{attribute.mod||0}}
-  <td><input type="number" ng-model="attribute.basevalue">
-  <td><input type="number" ng-model="attribute.bonus">
-</tr>
-</table>
+<body ng-controller="characterCtrl" class="container-fluid">
+<div id="header" class="row">
+  <div class="col-xs-12">
+    <button class="btn btn-default"><a href="#/">Main</a></button>
+    <button class="btn btn-default"><a href="#/skills">Skills</a></button>
+  </div>
 </div>
 
-<div class="block">
-<table>
-  <tr>
-    <td>
-    <td>Value
-    <td>Attr
-    <td>Bonus
-    <td>Ranks
-  </tr>
-  <tr ng-repeat="skill in character.skills | toArray | orderBy:'name'">
-    <td>{{skill.name}}
-    <td>{{skill.value}}
-    <td>{{skill.attribute | uppercase | limitTo:3}} {{skill.statbonus||0}}
-    <td><input type="number" ng-model="skill.bonus">
-    <td><input type="number" ng-model="skill.ranks">
-  </tr>
-  <tr>
-    <td><input type="text" ng-model='addSkillForm.name'>
-    <td>
-    <td>
-      <select required ng-model="addSkillForm.attribute">
-        <option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">{{attribute.name | uppercase | limitTo:3}}</option>
-      </select>
-    <td>
-    <td>
-      <button type="submit" ng-click="addSkill()">Add Skill</button>
-  </tr>
-</table>
-</div>
+<div ng-view></div>
 
 <div id="footer">
   <button type="submit" id="save-map-btn" class="btn btn-success" ng-click="saveCharacter()">Save Character</button>

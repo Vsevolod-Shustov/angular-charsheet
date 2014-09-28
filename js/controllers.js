@@ -5,6 +5,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   $scope.character = {};
   $scope.character.attributes = {};
   $scope.character.skills = {};
+  $scope.addSkillForm = {};
 
   //save character
   $scope.saveCharacter = function(){
@@ -20,6 +21,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     this.basevalue = 10;
     this.bonus = 0;
     this.value = 0;
+    this.mod = 0;
     this.index = index;
   };
   
