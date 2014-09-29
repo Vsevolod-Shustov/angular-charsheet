@@ -5,6 +5,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   $scope.character = {};
   $scope.character.attributes = {};
   $scope.character.skills = {};
+  $scope.character.saves = {};
   $scope.addSkillForm = {};
 
   //save character
@@ -16,6 +17,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     $scope.character = LocalStorageService.load('character');
   };
   
+  //attributes
   function Attribute(name, index){
     this.name = name;
     this.basevalue = 10;
@@ -25,13 +27,19 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     this.index = index;
   };
   
-  $scope.character.attributes.strength = new Attribute('strength',1);
-  $scope.character.attributes.dexterity = new Attribute('dexterity',2);
-  $scope.character.attributes.constitution = new Attribute('constitution',3);
-  $scope.character.attributes.intelligence = new Attribute('intelligence',4);
-  $scope.character.attributes.wisdom = new Attribute('wisdom',5);
-  $scope.character.attributes.charisma = new Attribute('charisma',6);
+  var attributes = [
+    {name:'strength',index:1},{name:'dexterity',index:2},
+    {name:'constitution',index:3},
+    {name:'intelligence',index:4},
+    {name:'wisdom',index:5},
+    {name:'charisma',index:6}
+  ];
   
+  angular.forEach(attributes, function(item){
+    $scope.character.attributes[item.name] = new Attribute(item.name,item.index);
+  });
+  
+  //skills
   function Skill(name, attribute){
     this.name = name;
     this.attribute = attribute;
@@ -45,6 +53,27 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     $scope.addSkillForm = {};
   };
   
+  //saves
+  function Save(name,attribute,index){
+    this.name = name;
+    this.attribute = attribute;
+    this.value = 0;
+    this.bonus = 0;
+    this.base = 0;
+    this.index = index;
+  };
+  
+  var saves = [
+    {name:'fortitude', attribute:'constitution', index:1},
+    {name:'reflex', attribute:'dexterity', index:2},
+    {name:'will', attribute:'wisdom', index:3}
+  ];
+  
+  angular.forEach(saves, function(item){
+    $scope.character.saves[item.name] = new Save(item.name, item.attribute, item.index);
+  });
+  
+  //update
   $scope.update = function(){
     //attributes
     angular.forEach($scope.character.attributes, function(item){
@@ -54,8 +83,14 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     
     //skills
     angular.forEach($scope.character.skills, function(item){
-      item.statbonus = $scope.character.attributes[item.attribute].mod
-      item.value = item.ranks + item.statbonus + item.bonus;
+      item.statbonus = $scope.character.attributes[item.attribute].mod;
+      item.value = item.base + item.statbonus + item.bonus;
+    });
+    
+    //saves
+    angular.forEach($scope.character.saves, function(item){
+      item.statbonus = $scope.character.attributes[item.attribute].mod;
+      item.value = item.base + item.statbonus + item.bonus;
     });
   };
   

@@ -21,6 +21,9 @@ csApp.config(function($routeProvider) {
     when('/', {
       templateUrl: 'partials/main.html'
     }).
+    when('/main', {
+      templateUrl: 'partials/main.html'
+    }).
     when('/skills', {
       templateUrl: 'partials/skills.html'
     });

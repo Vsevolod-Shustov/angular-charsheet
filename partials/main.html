@@ -8,11 +8,28 @@
     <td>Bonus
   </tr>
   <tr ng-repeat="attribute in character.attributes | toArray | orderBy:'index'">
-  <td>{{attribute.name | uppercase | limitTo:3}}
-  <td>{{attribute.value||10}}
-  <td>{{attribute.mod||0}}
-  <td><input type="number" ng-model="attribute.basevalue" spinner>
-  <td><input type="number" ng-model="attribute.bonus" spinner>
-</tr>
+    <td>{{attribute.name | uppercase | limitTo:3}}
+    <td>{{attribute.value||10}}
+    <td>{{attribute.mod||0}}
+    <td><input type="number" ng-model="attribute.basevalue" spinner>
+    <td><input type="number" ng-model="attribute.bonus" spinner>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+    <td>Value
+    <td>Base
+    <td>Attr
+    <td>Bonus
+  </tr>
+  <tr ng-repeat="save in character.saves | toArray | orderBy:'index'">
+    <td>{{save.name}}
+    <td>{{save.value}}
+    <td>{{save.base}}
+    <td>{{save.attribute | uppercase | limitTo:3}} {{save.statbonus||0}}
+    <td><input type="number" ng-model="save.bonus" spinner>
+  </tr>
 </table>
 </div>
