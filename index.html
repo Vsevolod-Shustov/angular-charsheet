@@ -14,22 +14,25 @@
   <script src="js/services.js"></script>
   <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
-<body ng-controller="characterCtrl" class="container-fluid">
+<body ng-controller="characterCtrl" class="container">
 <div id="header" class="row">
   <div class="col-xs-12">
-    <button class="btn btn-default"><a href="#">Main</a></button>
-    <button class="btn btn-default"><a href="#/skills">Skills</a></button>
+    <a class="btn btn-default" href="#">Main</a>
+    <a class="btn btn-default" href="#/skills">Skills</a>
+    <a class="btn btn-default" href="#/levels">Levels</a>
   </div>
 </div>
 
-<div ng-view></div>
+<div class="row" ng-view></div>
 
 <div id="footer" class="row">
-  <button type="submit" id="save-map-btn" class="btn btn-success" ng-click="saveCharacter()">Save Character</button>
-  <button type="submit" id="load-map-btn" class="btn btn-warning" ng-click="loadCharacter()">Load Character</button>
-  <pre>
-  {{character | json}}
-  </pre>
+  <div class="col-xs-12">
+    <button type="submit" id="save-map-btn" class="btn btn-success" ng-click="saveCharacter()">Save Character</button>
+    <button type="submit" id="load-map-btn" class="btn btn-warning" ng-click="loadCharacter()">Load Character</button>
+    <pre>
+    {{character | json}}
+    </pre>
+  </div>
 </div>
 </body>
 </html>

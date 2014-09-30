@@ -18,13 +18,16 @@ csApp.filter("toArray", function(){
 
 csApp.config(function($routeProvider) {
     $routeProvider.
-    when('/', {
-      templateUrl: 'partials/main.html'
-    }).
     when('/main', {
       templateUrl: 'partials/main.html'
     }).
     when('/skills', {
       templateUrl: 'partials/skills.html'
+    }).
+    when('/levels', {
+      templateUrl: 'partials/levels.html'
+    }).
+    when('/', {
+      templateUrl: 'partials/main.html'
     });
 });

@@ -3,10 +3,6 @@ var csControllers = angular.module('csControllers', []);
 
 csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', function($scope, LocalStorageService){
   $scope.character = {};
-  $scope.character.attributes = {};
-  $scope.character.skills = {};
-  $scope.character.saves = {};
-  $scope.addSkillForm = {};
 
   //save character
   $scope.saveCharacter = function(){
@@ -18,6 +14,8 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   
   //attributes
+  $scope.character.attributes = {};
+    
   function Attribute(name, index){
     this.name = name;
     this.basevalue = 10;
@@ -40,6 +38,9 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   });
   
   //skills
+  $scope.character.skills = {};
+  $scope.addSkillForm = {};
+  
   function Skill(name, attribute){
     this.name = name;
     this.attribute = attribute;
@@ -54,6 +55,8 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   
   //saves
+  $scope.character.saves = {};
+  
   function Save(name,attribute,index){
     this.name = name;
     this.attribute = attribute;
@@ -64,14 +67,56 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   
   var saves = [
-    {name:'fortitude', attribute:'constitution', index:1},
-    {name:'reflex', attribute:'dexterity', index:2},
+    {name:'fort', attribute:'constitution', index:1},
+    {name:'ref', attribute:'dexterity', index:2},
     {name:'will', attribute:'wisdom', index:3}
   ];
   
   angular.forEach(saves, function(item){
     $scope.character.saves[item.name] = new Save(item.name, item.attribute, item.index);
   });
+  
+  //levels
+  $scope.character.levels = {};
+  //$scope.addLevelForm = {};
+  $scope.addLevelForm = {
+    'index':1,
+    'name':'bard',
+    'bab':'medium',
+    'fort':'bad',
+    'ref':'good',
+    'will':'good',
+    'hp':8,
+    'skills':6
+  };
+  
+  function Level(index, name, bab, fort, ref, will, hp, skills){
+    this.index = index;
+    this.name = name.toLowerCase();
+    this.bab = bab;
+    this.fort = fort;
+    this.ref = ref;
+    this.will = will;
+    this.hp = hp;
+    this.skills = skills;
+  };
+  
+  $scope.addLevel = function(){
+    $scope.character.levels[$scope.addLevelForm.index] = new Level(
+    $scope.addLevelForm.index,
+    $scope.addLevelForm.name,
+    $scope.addLevelForm.bab,
+    $scope.addLevelForm.fort,
+    $scope.addLevelForm.ref,
+    $scope.addLevelForm.will,
+    $scope.addLevelForm.hp,
+    $scope.addLevelForm.skills);
+    $scope.addLevelForm.index = $scope.addLevelForm.index + 1;
+  };
+  
+  $scope.removeLevel = function(index){
+    delete $scope.character.levels[index];
+  };
   
   //update
   $scope.update = function(){
