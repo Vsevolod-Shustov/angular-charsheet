@@ -31,3 +31,9 @@ csApp.config(function($routeProvider) {
       templateUrl: 'partials/main.html'
     });
 });
+
+csApp.filter('parseInt', function() {
+  return function(input) {
+    return parseInt(input);
+  };
+});

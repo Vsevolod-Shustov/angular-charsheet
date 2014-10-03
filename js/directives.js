@@ -1,3 +1,4 @@
+"use strict";
 var csDirectives = angular.module('csDirectives', []);
 
 csDirectives.directive('spinner', function(){

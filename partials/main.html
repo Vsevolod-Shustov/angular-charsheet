@@ -29,7 +29,7 @@
   <tr class="large" ng-repeat="save in character.saves | toArray | orderBy:'index'">
     <td class="large inverted">{{save.name | uppercase}}
     <td>{{save.value}}
-    <td>{{save.base}}
+    <td>{{save.base | parseInt}}
     <td>{{save.attribute | uppercase | limitTo:3}} {{save.statbonus||0}}
     <td><input type="number" ng-model="save.bonus" spinner>
   </tr>

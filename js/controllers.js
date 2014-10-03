@@ -133,9 +133,28 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     });
     
     //saves
-    angular.forEach($scope.character.saves, function(item){
-      item.statbonus = $scope.character.attributes[item.attribute].mod;
-      item.value = item.base + item.statbonus + item.bonus;
+    angular.forEach($scope.character.saves, function(save){
+      save.base = 0;
+      save.firsthighbonus = 0;
+    });
+    angular.forEach($scope.character.levels, function(level){
+      console.log('processing level ' + level.index);
+      angular.forEach($scope.character.saves, function(save){
+        if(level[save.name] == 'good'){
+          $scope.character.saves[save.name].base += 0.5;
+          console.log('level ' + level.index + ' has good ' + save.name + ' save');
+          save.firsthighbonus = 2;
+        } else {
+          $scope.character.saves[save.name].base += 0.34;
+          console.log('level ' + level.index + ' has bad ' + save.name + ' save');
+        };
+      });
+    });
+    angular.forEach($scope.character.saves, function(save){
+      save.statbonus = $scope.character.attributes[save.attribute].mod;
+      if(save.firsthighbonus){save.base += save.firsthighbonus};
+      save.value = parseInt(save.base) + save.statbonus + save.bonus;
+      console.log(save.name + ' base value is ' + parseInt(save.base));
     });
   };
   
