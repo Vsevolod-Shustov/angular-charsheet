@@ -31,7 +31,27 @@
     <td>{{save.value}}
     <td>{{save.base | parseInt}}
     <td>{{save.attribute | uppercase | limitTo:3}} {{save.statbonus||0}}
-    <td><input type="number" ng-model="save.bonus" spinner>
+    <td class='bonus-anchor' ng-click="show = !show">{{save.bonus}} <span class="glyphicon glyphicon-chevron-down"></span></td>
+    
+    <td class='bonus-popup-container'>
+      <table class="bonus-popup table table-bordered" ng-show="show">
+        <tr>
+          <td>Type</td>
+          <td>Value</td>
+          <td><span class="glyphicon glyphicon-remove-circle" ng-click="show = !show"></span></td>
+        </tr>
+        <tr class="large" ng-repeat="bonus in save.bonuses">
+          <td>{{bonus.name}}</td>
+          <td>{{bonus.value}}</td>
+          <td><span class="glyphicon glyphicon-remove" ng-click=""></span></td>
+        </tr>
+        <tr class="large">
+          <td><input type="text" ng-model='addBonusForm.name'></td>
+          <td><input type="number" ng-model='addBonusForm.value' spinner></td>
+          <td><span class="glyphicon glyphicon-plus" ng-click="addBonus(save, addBonusForm.name, addBonusForm.value)"></span></td>
+        </tr>
+      </table>
+    </td>
   </tr>
 </table>
 </div>

@@ -13,6 +13,24 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     $scope.character = LocalStorageService.load('character');
   };
   
+  //bonuses
+  function Bonus(name, value){
+    this.name = name;
+    this.value = value;
+  };
+  $scope.addBonus = function(item, name, value){
+    console.log('attempting to set '+name+' bonus of '+item.name+' to '+value);
+    console.log(item);
+    item.bonuses[name.toLowerCase()] = new Bonus(name.toLowerCase(), value);
+  };
+  
+  $scope.calculateBonuses = function(item){
+    item.bonus = 0;
+    angular.forEach(item.bonuses, function(bonus){
+      item.bonus += bonus.value;
+    });
+  };
+  
   //attributes
   $scope.character.attributes = {};
     
@@ -62,6 +80,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     this.attribute = attribute;
     this.value = 0;
     this.bonus = 0;
+    this.bonuses = {};
     this.base = 0;
     this.index = index;
   };
@@ -151,6 +170,10 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
       });
     });
     angular.forEach($scope.character.saves, function(save){
+      save.bonus = 0;
+      angular.forEach(save.bonuses, function(bonus){
+        save.bonus += bonus.value;
+      });
       save.statbonus = $scope.character.attributes[save.attribute].mod;
       if(save.firsthighbonus){save.base += save.firsthighbonus};
       save.value = parseInt(save.base) + save.statbonus + save.bonus;
