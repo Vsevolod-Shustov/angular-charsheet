@@ -17,6 +17,8 @@ csDirectives.directive('spinner', function(){
         element.trigger('input');
         return false;
       });
+      var arrows = angular.element('<span class="glyphicon glyphicon-resize-vertical"></span>');
+      angular.element(arrows).appendTo(element.parent());
     }
   }
 });

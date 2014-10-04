@@ -1,55 +1,59 @@
 <div class="col-xs-12">
-<table class="table table-bordered">
-  <tr>
-    <td>Level
-    <td>Class
-    <td>BAB
-    <td>Fort
-    <td>Ref
-    <td>Will
-    <td>HP
-    <td>Skills
-  </tr>
-  <tr class="large" ng-repeat="level in character.levels | toArray | orderBy:'index'">
-    <td>{{level.index}}
-    <td>{{level.name}}
-    <td>{{level.bab}}
-    <td>{{level.fort}}
-    <td>{{level.ref}}
-    <td>{{level.will}}
-    <td>{{level.hp}}
-    <td>{{level.skills}}
-    <td><span class="glyphicon glyphicon-remove" ng-click="removeLevel(level.index)"></span>
-  </tr>
+<div class="table table-bordered">
+  <div class="tr">
+    <div class="td">Level</div>
+    <div class="td">Class</div>
+    <div class="td">BAB</div>
+    <div class="td">Fort</div>
+    <div class="td">Ref</div>
+    <div class="td">Will</div>
+    <div class="td">HP</div>
+    <div class="td">Skills</div>
+  </div>
+  <div class="tr large" ng-repeat="level in character.levels | toArray | orderBy:'index'">
+    <div class="td">{{level.index}}</div>
+    <div class="td">{{level.name}}</div>
+    <div class="td">{{level.bab}}</div>
+    <div class="td">{{level.fort}}</div>
+    <div class="td">{{level.ref}}</div>
+    <div class="td">{{level.will}}</div>
+    <div class="td">{{level.hp}}</div>
+    <div class="td">{{level.skills}}</div>
+    <div class="td"><span class="glyphicon glyphicon-remove" ng-click="removeLevel(level.index)"></span></div>
+  </div>
   
-  <tr class="large">
-    <td><input type="number" ng-model='addLevelForm.index' spinner required>
-    <td><input type="text" ng-model='addLevelForm.name' required>
-    <td>
+  <div class="tr large">
+    <div class="td"><input type="number" ng-model='addLevelForm.index' spinner required></div>
+    <div class="td"><input type="text" ng-model='addLevelForm.name' required></div>
+    <div class="td">
       <select ng-model="addLevelForm.bab" required>
         <option value="good">Good</option>
         <option value="medium">Medium</option>
         <option value="bad">Bad</option>
       </select>
-    <td>
+    </div>
+    <div class="td">
       <select ng-model="addLevelForm.fort" required>
         <option value="good">Good</option>
         <option value="bad">Bad</option>
       </select>
-    <td>
+    </div>
+    <div class="td">
       <select ng-model="addLevelForm.ref" required>
         <option value="good" selected>Good</option>
         <option value="bad">Bad</option>
       </select>
-    <td>
+    </div>
+    <div class="td">
       <select ng-model="addLevelForm.will" required>
         <option value="good">Good</option>
         <option value="bad">Bad</option>
       </select>
-    <td><input type="number" ng-model='addLevelForm.hp' spinner required>
-    <td><input type="number" ng-model='addLevelForm.skills' spinner required>
-    <td><span class="glyphicon glyphicon-plus" ng-click="addLevel()"></span>
-  </tr>
-</table>
+    </div>
+    <div class="td"><input type="number" ng-model='addLevelForm.hp' spinner required></div>
+    <div class="td"><input type="number" ng-model='addLevelForm.skills' spinner required></div>
+    <div class="td"><span class="glyphicon glyphicon-plus" ng-click="addLevel()"></span></div>
+  </div>
+</div>
 <pre>{{addLevelForm | json}}</pre>
 </div>

@@ -1,57 +1,57 @@
 <div class="col-md-4">
-<table class="table table-bordered">
-  <tr>
-    <td>Name
-    <td>Value
-    <td>Mod
-    <td>Base
-    <td>Bonus
-  </tr>
-  <tr class="large" ng-repeat="attribute in character.attributes | toArray | orderBy:'index'">
-    <td class="large inverted">{{attribute.name | uppercase | limitTo:3}}
-    <td>{{attribute.value||10}}
-    <td>{{attribute.mod||0}}
-    <td><input type="number" ng-model="attribute.basevalue" spinner>
-    <td><input type="number" ng-model="attribute.bonus" spinner>
-  </tr>
-</table>
+<div class="table table-bordered">
+  <div class="tr">
+    <div class="td">Name</div>
+    <div class="td">Value</div>
+    <div class="td">Mod</div>
+    <div class="td">Base</div>
+    <div class="td">Bonus</div>
+  </div>
+  <div class="tr large" ng-repeat="attribute in character.attributes | toArray | orderBy:'index'">
+    <div class="td large inverted">{{attribute.name | uppercase | limitTo:3}}</div>
+    <div class="td">{{attribute.value||10}}</div>
+    <div class="td">{{attribute.mod||0}}</div>
+    <div class="td"><input type="number" ng-model="attribute.basevalue" spinner></div>
+    <div class="td"><input type="number" ng-model="attribute.bonus" spinner></div>
+  </div>
+</div>
 </div>
 
 <div class="col-md-4">
-<table class="table table-bordered">
-  <tr>
-    <td>Name
-    <td>Value
-    <td>Base
-    <td>Attribute
-    <td>Bonus
-  </tr>
-  <tr class="large" ng-repeat="save in character.saves | toArray | orderBy:'index'">
-    <td class="large inverted">{{save.name | uppercase}}
-    <td>{{save.value}}
-    <td>{{save.base | parseInt}}
-    <td>{{save.attribute | uppercase | limitTo:3}} {{save.statbonus||0}}
-    <td class='bonus-anchor' ng-click="show = !show">{{save.bonus}} <span class="glyphicon glyphicon-chevron-down"></span></td>
+<div class="table table-bordered">
+  <div class="tr">
+    <div class="td">Name</div>
+    <div class="td">Value</div>
+    <div class="td">Base</div>
+    <div class="td">Attribute</div>
+    <div class="td">Bonus</div>
+  </div>
+  <div class="tr large" ng-repeat="save in character.saves | toArray | orderBy:'index'">
+    <div class="td large inverted">{{save.name | uppercase}}</div>
+    <div class="td">{{save.value}}</div>
+    <div class="td">{{save.base | parseInt}}</div>
+    <div class="td">{{save.attribute | uppercase | limitTo:3}} {{save.statbonus||0}}</div>
+    <div class='td bonus-anchor' ng-click="show = !show">{{save.bonus}} <span class="glyphicon glyphicon-chevron-down"></span></div>
     
-    <td class='bonus-popup-container'>
-      <table class="bonus-popup table table-bordered" ng-show="show">
-        <tr>
-          <td>Type</td>
-          <td>Value</td>
-          <td><span class="glyphicon glyphicon-remove-circle" ng-click="show = !show"></span></td>
-        </tr>
-        <tr class="large" ng-repeat="bonus in save.bonuses">
-          <td>{{bonus.name}}</td>
-          <td>{{bonus.value}}</td>
-          <td><span class="glyphicon glyphicon-remove" ng-click=""></span></td>
-        </tr>
-        <tr class="large">
-          <td><input type="text" ng-model='addBonusForm.name'></td>
-          <td><input type="number" ng-model='addBonusForm.value' spinner></td>
-          <td><span class="glyphicon glyphicon-plus" ng-click="addBonus(save, addBonusForm.name, addBonusForm.value)"></span></td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
+    <div class='td bonus-popup-container'>
+      <div class="bonus-popup table table-bordered" ng-show="show">
+        <div class="tr">
+          <div class="td">Type</div>
+          <div class="td">Value</div>
+          <div class="td"><span class="glyphicon glyphicon-remove-circle" ng-click="show = !show"></span></div>
+        </div>
+        <div class="tr large" ng-repeat="bonus in save.bonuses">
+          <div class="td">{{bonus.name}}</div>
+          <div class="td">{{bonus.value}}</div>
+          <div class="td"><span class="glyphicon glyphicon-remove" ng-click=""></span></div>
+        </div>
+        <div class="tr large">
+          <div class="td"><input type="text" ng-model='addBonusForm.name'></div>
+          <div class="td"><input type="number" ng-model='addBonusForm.value' spinner></div>
+          <div class="td"><span class="glyphicon glyphicon-plus" ng-click="addBonus(save, addBonusForm.name, addBonusForm.value)"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
