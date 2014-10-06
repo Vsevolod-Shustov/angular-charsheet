@@ -14,14 +14,18 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   
   //bonuses
-  function Bonus(name, value){
+  function Bonus(name, source, value){
     this.name = name;
+    this.source = source;
     this.value = value;
   };
-  $scope.addBonus = function(item, name, value){
+  $scope.addBonus = function(item, source, name, value){
     console.log('attempting to set '+name+' bonus of '+item.name+' to '+value);
     console.log(item);
-    item.bonuses[name.toLowerCase()] = new Bonus(name.toLowerCase(), value);
+    item.bonuses[name.toLowerCase()] = new Bonus(name.toLowerCase(), source, value);
+  };
+  $scope.removeBonus = function(save, bonus){
+    delete save.bonuses[bonus.name];
   };
   
   $scope.calculateBonuses = function(item){

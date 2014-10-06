@@ -36,19 +36,22 @@
     <div class='td bonus-popup-container'>
       <div class="bonus-popup table table-bordered" ng-show="show">
         <div class="tr">
+          <div class="td">Source</div>
           <div class="td">Type</div>
           <div class="td">Value</div>
           <div class="td"><span class="glyphicon glyphicon-remove-circle" ng-click="show = !show"></span></div>
         </div>
         <div class="tr large" ng-repeat="bonus in save.bonuses">
+          <div class="td">{{bonus.source}}</div>
           <div class="td">{{bonus.name}}</div>
           <div class="td">{{bonus.value}}</div>
-          <div class="td"><span class="glyphicon glyphicon-remove" ng-click=""></span></div>
+          <div class="td"><span class="glyphicon glyphicon-remove" ng-click="removeBonus(save, bonus)"></span></div>
         </div>
         <div class="tr large">
+          <div class="td"><input type="text" ng-model='addBonusForm.source'></div>
           <div class="td"><input type="text" ng-model='addBonusForm.name'></div>
           <div class="td"><input type="number" ng-model='addBonusForm.value' spinner></div>
-          <div class="td"><span class="glyphicon glyphicon-plus" ng-click="addBonus(save, addBonusForm.name, addBonusForm.value)"></span></div>
+          <div class="td"><span class="glyphicon glyphicon-plus" ng-click="addBonus(save, addBonusForm.source, addBonusForm.name, addBonusForm.value)"></span></div>
         </div>
       </div>
     </div>
