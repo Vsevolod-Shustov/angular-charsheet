@@ -39,6 +39,14 @@ input[type=number]::-webkit-outer-spin-button {
   display:table-row;
   position:relative;
 }
+.table-header {
+  font-weight:bold;
+  text-align:center;
+}
+.fullwidth {
+  width:100%;
+  text-align:center;
+}
 .tr:last-of-type .td {
   border-bottom:1px solid lightgray;
 }

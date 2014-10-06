@@ -35,6 +35,18 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     });
   };
   
+  //effects
+  $scope.character.effects = {};
+   $scope.addSubEffectForm = {};
+  $scope.addSubEffectForm.value = 0;
+  function Effect(name){
+    this.name = name;
+  };
+  $scope.addEffect = function(name){
+    if(!$scope.character.effects){$scope.character.effects = {};};
+    $scope.character.effects[name.toLowerCase()] = new Effect(name.toLowerCase());
+  };
+  
   //attributes
   $scope.character.attributes = {};
     
@@ -48,7 +60,8 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   
   var attributes = [
-    {name:'strength',index:1},{name:'dexterity',index:2},
+    {name:'strength',index:1},
+    {name:'dexterity',index:2},
     {name:'constitution',index:3},
     {name:'intelligence',index:4},
     {name:'wisdom',index:5},
