@@ -1,7 +1,39 @@
-<div class="col-xs-12">
-<div class="table table-bordered">
-  <div class="tr">
-    <div class="td">     </div>
-  </div> 
+<div class="col-md-6">
+<div ng-repeat="item in character.items">
+  <div class="item-header">{{item.name}}</div>
+  <div class="table table-bordered">
+    <div class="tr" ng-repeat="effect in item.effects">
+      <div class="td">{{effect.target}}</div>
+      <div class="td">{{effect.type}}</div>
+      <div class="td">{{effect.value}}</div>
+      <div class="td"><span class="glyphicon glyphicon-remove" ng-click="removeEffect(item.effects, effect.target)"></span></div>
+    </div>
+  
+    <div class="tr large">
+      <div class="td">
+        <select ng-model="addEffectForm.target">
+          <option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">
+            {{attribute.name}}
+          </option>
+          <option ng-repeat="save in character.saves" value="{{save.name}}">
+            {{save.name}}
+          </option>
+        </select>
+      </div>
+      <div class="td">
+        <select ng-model="addEffectForm.type" placeholder="Bonus Type">
+          <option ng-repeat="type in bonusTypes" value="{{type}}">
+            {{type}}
+          </option>
+        </select>
+      </div>
+      <div class="td"><input type="number" ng-model="addEffectForm.value" spinner></div>
+      <div class="td"><span class="glyphicon glyphicon-plus" ng-click="addEffect(addEffectForm.target, addEffectForm.type, addEffectForm.value, item)"></span></div>
+    </div>
+  </div>
+</div>
+<div class="tr">
+  <div class="td"><input type="text" ng-model="addItemForm.name" placeholder="Item Name"></div>
+  <div class="td"><button ng-click="addItem(addItemForm.name)">Add Item</button></div>
 </div>
 </div>
