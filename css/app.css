@@ -39,10 +39,6 @@ input[type=number]::-webkit-outer-spin-button {
   display:table-row;
   position:relative;
 }
-.table-header {
-  font-weight:bold;
-  text-align:center;
-}
 .fullwidth {
   width:100%;
   text-align:center;
@@ -105,15 +101,17 @@ input[type="text"] {
 
 .table {
   position:relative;
+  background:white;
+  margin-bottom:0;
 }
 .bonus-anchor {
   position:relative;
   cursor:pointer;
   -webkit-user-select: none;
 }
-.bonus-popup {
+.popup-fixed {
   position:fixed;
-  top:30px;
+  bottom:30px;
   right:30px;
   z-index:10;
   width:480px;
@@ -122,6 +120,7 @@ input[type="text"] {
   padding:0!important;
   border:0!important;
   position:relative;
+  width:0px;
 }
 .glyphicon-chevron-down,
 .glyphicon-resize-vertical {
@@ -136,10 +135,20 @@ input[type="text"] {
   top:-0.5em;
   right:-0.5em;
   display:block;
+  z-index:9000;
+  background:white;
+  border-radius:12px;
 }
-.item-header {
+.header {
   font-weight:bold;
   text-align:center;
   border:1px solid lightgray;
   border-bottom:0;
+  position:relative;
+}
+.glyphicon-cog {
+  position:absolute;
+  right:4px;
+  top:4px;
+  cursor:pointer;
 }

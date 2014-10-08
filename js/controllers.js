@@ -193,13 +193,11 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     });
     
     //Attributes
-    angular.forEach($scope.character.attributes, function(item){
-      item.bonus = 0;
-      angular.forEach(item.bonuses, function(bonus){
-        item.bonus += bonus.value;
-      });
-      item.value = item.basevalue + item.bonus;
-      item.mod = parseInt((item.value - 10)/2);
+    angular.forEach($scope.character.attributes, function(attribute){
+      attribute.bonus = 0;
+      $scope.calculateBonuses(attribute);
+      attribute.value = attribute.basevalue + attribute.bonus;
+      attribute.mod = parseInt((attribute.value - 10)/2);
     });
     
     //Skills
@@ -225,9 +223,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     //calculate save bonus
     angular.forEach($scope.character.saves, function(save){
       save.bonus = 0;
-      angular.forEach(save.bonuses, function(bonus){
-        save.bonus += bonus.value;
-      });
+      $scope.calculateBonuses(save);
       save.statbonus = $scope.character.attributes[save.attribute].mod;
       if(save.firsthighbonus){save.base += save.firsthighbonus};
       save.value = parseInt(save.base) + save.statbonus + save.bonus;
@@ -236,4 +232,11 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   
   $scope.$watch('character', function(){$scope.update()},true);
+  
+  //functions
+  $scope.calculateBonuses = function(item){
+    angular.forEach(item.bonuses, function(bonus){
+      item.bonus += bonus.value;
+    });
+  };
 }]);
