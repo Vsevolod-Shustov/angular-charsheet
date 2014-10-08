@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-12">
 <div ng-repeat="item in character.items">
   <div class="item-header">{{item.name}}</div>
   <div class="table table-bordered">
@@ -11,11 +11,17 @@
   
     <div class="tr large">
       <div class="td">
-        <select ng-model="addEffectForm.target">
+        <select ng-model="addEffectForm.targetGroup">
+          <option value="attributes">Attributes</option>
+          <option value="saves">Saves</option>
+        </select>
+        <select ng-model="addEffectForm.target" ng-show="addEffectForm.targetGroup == 'attributes'" ng-hide="addEffectForm.targetGroup != 'attributes'">
           <option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">
             {{attribute.name}}
           </option>
-          <option ng-repeat="save in character.saves" value="{{save.name}}">
+        </select>
+        <select ng-model="addEffectForm.target" ng-show="addEffectForm.targetGroup == 'saves'">
+          <option ng-repeat="save in character.saves" value="{{save.name}}" ng-show="addEffectForm.targetGroup == 'saves'" ng-hide="addEffectForm.targetGroup != 'saves'">
             {{save.name}}
           </option>
         </select>
@@ -28,7 +34,7 @@
         </select>
       </div>
       <div class="td"><input type="number" ng-model="addEffectForm.value" spinner></div>
-      <div class="td"><span class="glyphicon glyphicon-plus" ng-click="addEffect(addEffectForm.target, addEffectForm.type, addEffectForm.value, item)"></span></div>
+      <div class="td"><span class="glyphicon glyphicon-plus" ng-click="addEffect(addEffectForm.targetGroup, addEffectForm.target, addEffectForm.type, addEffectForm.value, item)"></span></div>
     </div>
   </div>
 </div>

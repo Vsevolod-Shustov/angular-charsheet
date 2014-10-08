@@ -40,13 +40,14 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   //effects
   $scope.addEffectForm = {};
   $scope.addEffectForm.value = 0;
-  function Effect(target, type, value){
+  function Effect(targetgroup, target, type, value){
+    this.targetgroup = targetgroup;
     this.target = target;
     this.type = type;
     this.value = value;
   };
-  $scope.addEffect = function(target, type, value, source){
-    source.effects[target] = new Effect(target, type.toLowerCase(), value);
+  $scope.addEffect = function(targetgroup, target, type, value, source){
+    source.effects[target] = new Effect(targetgroup, target, type.toLowerCase(), value);
   };
   $scope.removeEffect = function(collection, target){
     delete collection[target];
@@ -69,6 +70,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     this.name = name;
     this.basevalue = 10;
     this.bonus = 0;
+    this.bonuses = {};
     this.value = 0;
     this.mod = 0;
     this.index = index;
@@ -177,20 +179,25 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
       save.firsthighbonus = 0;
       save.bonuses = {};
     });
+    angular.forEach($scope.character.attributes, function(attr){
+      attr.bonuses = {};
+    });
     
     //Items
     angular.forEach($scope.character.items, function(item){
       console.log(item.effects);
       angular.forEach(item.effects, function(effect){
         console.log(effect);
-        angular.forEach($scope.character.saves, function(target){
-          if(target.name == effect.target){target.bonuses[effect.type] = new Bonus(item.name, effect.type, effect.value)};
-        });
+        $scope.character[effect.targetgroup][effect.target].bonuses[effect.type] = new Bonus(item.name, effect.type, effect.value);
       });
     });
     
     //Attributes
     angular.forEach($scope.character.attributes, function(item){
+      item.bonus = 0;
+      angular.forEach(item.bonuses, function(bonus){
+        item.bonus += bonus.value;
+      });
       item.value = item.basevalue + item.bonus;
       item.mod = parseInt((item.value - 10)/2);
     });
