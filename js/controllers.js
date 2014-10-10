@@ -14,7 +14,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   
   //list of bonus types
-  $scope.bonusTypes = ['alchemical', 'armor', 'circumstance', 'competence', 'deflection', 'dodge', 'enhancement', 'inherent', 'insight', 'luck', 'morale', 'natural armor', 'profane', 'racial', 'resistance', 'sacred', 'shield', 'size', 'trait'];
+  $scope.bonusTypes = ['alchemical', 'armor', 'circumstance', 'competence', 'deflection', 'dodge', 'enhancement', 'inherent', 'insight', 'luck', 'morale', 'natural armor', 'profane', 'racial', 'resistance', 'sacred', 'shield', 'size', 'trait', 'untyped'];
   
   //bonuses
   function Bonus(source, type, value){
@@ -58,6 +58,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   function Item(name){
     this.name = name;
     this.effects = {};
+    this.active = true;
   };
   $scope.addItem = function(name){
     $scope.character.items[name.toLowerCase()] = new Item(name.toLowerCase());
@@ -185,11 +186,18 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     
     //Items
     angular.forEach($scope.character.items, function(item){
-      console.log(item.effects);
-      angular.forEach(item.effects, function(effect){
-        console.log(effect);
-        $scope.character[effect.targetgroup][effect.target].bonuses[effect.type] = new Bonus(item.name, effect.type, effect.value);
-      });
+      //console.log(item.effects);
+      if(item.active == true){
+        angular.forEach(item.effects, function(effect){
+          //console.log(effect);
+          if(!$scope.character[effect.targetgroup][effect.target].bonuses[effect.type]){
+            $scope.character[effect.targetgroup][effect.target].bonuses[effect.type] = new Bonus(item.name, effect.type, effect.value);
+          } else if($scope.character[effect.targetgroup][effect.target].bonuses[effect.type].type == 'dodge' || 
+          $scope.character[effect.targetgroup][effect.target].bonuses[effect.type].type == 'untyped'){
+            $scope.character[effect.targetgroup][effect.target].bonuses[effect.type].value += effect.value;
+          }
+        });
+      };
     });
     
     //Attributes

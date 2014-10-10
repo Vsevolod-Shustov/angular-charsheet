@@ -1,5 +1,5 @@
 <div class="col-md-12">
-<div ng-repeat="item in character.items">
+<div class="item" ng-repeat="item in character.items">
   <div class="header">{{item.name}}</div>
   <div class="table table-bordered">
     <div class="tr" ng-repeat="effect in item.effects">
@@ -9,7 +9,7 @@
       <div class="td"><span class="glyphicon glyphicon-remove" ng-click="removeEffect(item.effects, effect.target)"></span></div>
     </div>
   
-    <div class="tr large">
+    <div class="tr large" ng-hide="addItemEffectShow">
       <div class="td">
         <select ng-model="addEffectForm.targetGroup">
           <option value="attributes">Attributes</option>
@@ -41,5 +41,6 @@
 <div class="tr">
   <div class="td"><input type="text" ng-model="addItemForm.name" placeholder="Item Name"></div>
   <div class="td"><button ng-click="addItem(addItemForm.name)">Add Item</button></div>
+  <div class="td"><button ng-click="addItemEffectShow = !addItemEffectShow">Toggle add item properties form</button></div>
 </div>
 </div>

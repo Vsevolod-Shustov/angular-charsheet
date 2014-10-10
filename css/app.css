@@ -34,6 +34,7 @@ input[type=number]::-webkit-outer-spin-button {
 .table {
   display:table;
   border:none;
+  border-collapse:collapse;
 }
 .tr {
   display:table-row;
@@ -43,9 +44,6 @@ input[type=number]::-webkit-outer-spin-button {
   width:100%;
   text-align:center;
 }
-.tr:last-of-type .td {
-  border-bottom:1px solid lightgray;
-}
 .td {
   display:table-cell;
   padding:0;
@@ -53,14 +51,9 @@ input[type=number]::-webkit-outer-spin-button {
   height:30px!important;
   text-align:center!important;
   vertical-align:middle!important;
-  /*border:1px solid gray;*/
   font-size:inherit;
   position:relative;
-  border-top:1px solid lightgray;
-  border-right:1px solid lightgray;
-}
-.td:first-of-type {
-  border-left:1px solid lightgray;
+  border:1px solid lightgray;
 }
 .td:first-letter {
   text-transform:uppercase;
@@ -151,4 +144,14 @@ input[type="text"] {
   right:4px;
   top:4px;
   cursor:pointer;
+}
+.item {
+  margin-bottom:30px;
+}
+input[type="checkbox"] {
+  float:right;
+  position:relative;
+  right:4px;
+  top:4px;
+  margin-left:8px;
 }
