@@ -12,12 +12,26 @@ module.exports = function(grunt) {
         src: ['**'],
         dest: 'dist/'
       }
+    },
+    
+    'gh-pages': {
+      options: {
+        base: 'dist',
+        branch: 'gh-pages',
+        repo: 'https://github.com/Vsevolod-Shustov/angular-charsheet.git'
+      },
+      src: '**/*'
     }
   });
   
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-gh-pages');
   
   grunt.registerTask('default', [
     'copy'
+  ]);
+  
+  grunt.registerTask('deploy', [
+    'gh-pages'
   ]);
 };
