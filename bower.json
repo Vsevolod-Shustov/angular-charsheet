@@ -11,8 +11,7 @@
     "angular-mocks": "*",
     "jquery": "2.x.x",
     "jquery-mousewheel": "3.x.x",
-    "bootstrap": "3.x.x",
-    "jasmine": "*",
-    "karma": "*"
-  }
+    "bootstrap": "3.x.x"
+  },
+  "appPath": "app"
 }

@@ -5,6 +5,6 @@
   "author": "",
   "licenses": "",
   "devDependencies": {
-    "protractor": "*"
+    "grunt": "^0.4.5"
   }
 }
