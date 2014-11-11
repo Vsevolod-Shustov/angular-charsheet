@@ -9,8 +9,15 @@ module.exports = function(grunt) {
       main:{
         expand: true,
         cwd: 'app/',
-        
+        src: ['**'],
+        dest: 'dist/'
       }
-    },
+    }
   });
+  
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  
+  grunt.registerTask('default', [
+    'copy'
+  ]);
 };
