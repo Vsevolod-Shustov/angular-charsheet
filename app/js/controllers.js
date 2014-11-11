@@ -174,6 +174,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   
   //update
   $scope.update = function(){
+    console.log('update started');
     //reset
     angular.forEach($scope.character.saves, function(save){
       save.base = 0;
@@ -237,6 +238,8 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
       save.value = parseInt(save.base) + save.statbonus + save.bonus;
       //console.log(save.name + ' base value is ' + parseInt(save.base));
     });
+    
+    console.log('update finished');
   };
   
   $scope.$watch('character', function(){$scope.update()},true);

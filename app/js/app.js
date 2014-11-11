@@ -18,6 +18,9 @@ csApp.filter("toArray", function(){
 
 csApp.config(function($routeProvider) {
     $routeProvider.
+    when('/', {
+      redirectTo: '/main'
+    }).
     when('/main', {
       templateUrl: 'partials/main.html'
     }).
@@ -29,9 +32,6 @@ csApp.config(function($routeProvider) {
     }).
     when('/items', {
       templateUrl: 'partials/items.html'
-    }).
-    when('/', {
-      templateUrl: 'partials/main.html'
     });
 });
 
