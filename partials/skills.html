@@ -1,0 +1,30 @@
+<div class="col-xs-12">
+<div class="table table-bordered">
+  <div class="tr">
+    <div class="td">Name</div>
+    <div class="td">Value</div>
+    <div class="td">Attr</div>
+    <div class="td">Bonus</div>
+    <div class="td">Ranks</div>
+  </div>
+  <div class="tr" ng-repeat="skill in character.skills | toArray | orderBy:'name'">
+    <div class="td">{{skill.name}}</div>
+    <div class="td">{{skill.value}}</div>
+    <div class="td">{{skill.attribute | uppercase | limitTo:3}} {{skill.statbonus||0}}</div>
+    <div class="td"><input type="number" ng-model="skill.bonus" spinner></div>
+    <div class="td"><input type="number" ng-model="skill.ranks" spinner></div>
+  </div>
+  <div class="tr">
+    <div class="td"><input type="text" ng-model='addSkillForm.name'></div>
+    <div class="td"></div>
+    <div class="td">
+      <select required ng-model="addSkillForm.attribute">
+        <option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">{{attribute.name | uppercase | limitTo:3}}</option>
+      </select>
+    </div>
+    <div class="td"></div>
+    <div class="td"></div>
+    <div class="td"><span class="glyphicon glyphicon-plus" ng-click="addSkill()"></span></div>
+  </div>
+</table>
+</div>

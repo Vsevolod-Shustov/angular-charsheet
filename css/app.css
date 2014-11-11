@@ -1,0 +1,157 @@
+* {
+  box-sizing:border-box;
+  font-size:16px;
+  margin:0;
+  padding:0;
+}
+.row {
+  padding-top:15px;
+  padding-bottom:15px;
+}
+button a {
+  text-decoration:none!important;
+}
+.container {
+  max-width:960px;
+  margin:0 auto;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.inverted {
+  color:white;
+  background-color:black;
+}
+.large {
+  font-size:20px;
+}
+.small {
+  font-size:12px;
+}
+
+.table {
+  display:table;
+  border:none;
+  border-collapse:collapse;
+}
+.tr {
+  display:table-row;
+  position:relative;
+}
+.fullwidth {
+  width:100%;
+  text-align:center;
+}
+.td {
+  display:table-cell;
+  padding:0;
+  line-height:30px;
+  height:30px!important;
+  text-align:center!important;
+  vertical-align:middle!important;
+  font-size:inherit;
+  position:relative;
+  border:1px solid lightgray;
+}
+.td:first-letter {
+  text-transform:uppercase;
+}
+input[type="number"] {
+  width:100%;
+  max-width:30px;
+  border:none;
+  text-align:center;
+  outline:none;
+  cursor:ns-resize;
+}
+input[type="number"]::selection {
+  background-color:#eee;
+}
+input[type="text"] {
+  border:none;
+  text-align:center;
+  outline:none;
+  border-bottom:1px solid black;
+}
+
+.block {
+  float:left;
+}
+
+.glyphicon-plus,
+.glyphicon-remove,
+.glyphicon-remove-circle {
+  cursor:pointer;
+}
+/*.glyphicon-remove:hover {
+  color:#e00;
+}
+.glyphicon-plus:hover {
+  color:#0e0;
+}*/
+
+.table {
+  position:relative;
+  background:white;
+  margin-bottom:0;
+}
+.bonus-anchor {
+  position:relative;
+  cursor:pointer;
+  -webkit-user-select: none;
+}
+.popup-fixed {
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  z-index:10;
+  width:480px;
+}
+.bonus-popup-container {
+  padding:0!important;
+  border:0!important;
+  position:relative;
+  width:0px;
+}
+.glyphicon-chevron-down,
+.glyphicon-resize-vertical {
+  position:absolute;
+  top:2px;
+  right:2px;
+  font-size:10px;
+}
+.glyphicon-remove-circle {
+  position:absolute;
+  font-size:24px;
+  top:-0.5em;
+  right:-0.5em;
+  display:block;
+  z-index:9000;
+  background:white;
+  border-radius:12px;
+}
+.header {
+  font-weight:bold;
+  text-align:center;
+  border:1px solid lightgray;
+  border-bottom:0;
+  position:relative;
+}
+.glyphicon-cog {
+  position:absolute;
+  right:4px;
+  top:4px;
+  cursor:pointer;
+}
+.item {
+  margin-bottom:30px;
+}
+input[type="checkbox"] {
+  float:right;
+  position:relative;
+  right:4px;
+  top:4px;
+  margin-left:8px;
+}
