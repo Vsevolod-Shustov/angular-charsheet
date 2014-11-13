@@ -12,23 +12,11 @@
     <div class="tr large" ng-hide="addItemEffectShow">
       <div class="td">
         <select ng-model="addEffectForm.targetGroup">
-          <option value="attributes">Attributes</option>
-          <option value="saves">Saves</option>
-          <option value="movement">Movement</option>
+          <option ng-repeat="group in effectgroups" value="{{group.name}}">{{group.name}}</option>
         </select>
-        <select ng-model="addEffectForm.target" ng-show="addEffectForm.targetGroup == 'attributes'" ng-hide="addEffectForm.targetGroup != 'attributes'">
-          <option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">
-            {{attribute.name}}
-          </option>
-        </select>
-        <select ng-model="addEffectForm.target" ng-show="addEffectForm.targetGroup == 'saves'">
-          <option ng-repeat="save in character.saves" value="{{save.name}}" ng-show="addEffectForm.targetGroup == 'saves'" ng-hide="addEffectForm.targetGroup != 'saves'">
-            {{save.name}}
-          </option>
-        </select>
-        <select ng-model="addEffectForm.target" ng-show="addEffectForm.targetGroup == 'movement'">
-          <option ng-repeat="speed in character.movement" value="{{speed.name}}" ng-show="addEffectForm.targetGroup == 'movement'" ng-hide="addEffectForm.targetGroup != 'movement'">
-            {{speed.name}}
+        <select ng-repeat="group in effectgroups" ng-model="addEffectForm.target" ng-show="addEffectForm.targetGroup == '{{group.name}}'" ng-hide="addEffectForm.targetGroup != '{{group.name}}'">
+          <option ng-repeat="stat in character[group.name]" value="{{stat.name}}">
+            {{stat.name}}
           </option>
         </select>
       </div>

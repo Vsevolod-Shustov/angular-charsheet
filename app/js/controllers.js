@@ -54,6 +54,12 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     delete collection[target];
   };
   
+  $scope.effectgroups = [
+    {name:'attributes'},
+    {name:'saves'},
+    {name:'movement'}
+  ];
+  
   //items
   $scope.character.items = {};
   function Item(name){
