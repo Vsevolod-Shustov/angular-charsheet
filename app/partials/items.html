@@ -14,6 +14,7 @@
         <select ng-model="addEffectForm.targetGroup">
           <option value="attributes">Attributes</option>
           <option value="saves">Saves</option>
+          <option value="movement">Movement</option>
         </select>
         <select ng-model="addEffectForm.target" ng-show="addEffectForm.targetGroup == 'attributes'" ng-hide="addEffectForm.targetGroup != 'attributes'">
           <option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">
@@ -23,6 +24,11 @@
         <select ng-model="addEffectForm.target" ng-show="addEffectForm.targetGroup == 'saves'">
           <option ng-repeat="save in character.saves" value="{{save.name}}" ng-show="addEffectForm.targetGroup == 'saves'" ng-hide="addEffectForm.targetGroup != 'saves'">
             {{save.name}}
+          </option>
+        </select>
+        <select ng-model="addEffectForm.target" ng-show="addEffectForm.targetGroup == 'movement'">
+          <option ng-repeat="speed in character.movement" value="{{speed.name}}" ng-show="addEffectForm.targetGroup == 'movement'" ng-hide="addEffectForm.targetGroup != 'movement'">
+            {{speed.name}}
           </option>
         </select>
       </div>

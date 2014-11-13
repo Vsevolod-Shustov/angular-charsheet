@@ -33,6 +33,16 @@
   </div>
 </div>
 
+<div class="header">Movement</div>
+<div class="table table-bordered">
+  <div class="tr">
+    <div class="td" ng-repeat="speed in character.movement | toArray | orderBy:'index'">{{speed.name}}</div>
+  </div>
+  <div class="tr">
+    <div class="td" ng-repeat="speed in character.movement | toArray | orderBy:'index'">{{speed.value}}</div>
+  </div>
+</div>
+
 <div class="popup-fixed table table-bordered" ng-show="showSavesSettings">
   <span class="glyphicon glyphicon-remove-circle" ng-click="showSavesSettings = !showSavesSettings"></span>
   <div class="tr large" ng-repeat="save in character.saves">
