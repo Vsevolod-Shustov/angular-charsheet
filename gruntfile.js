@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       main:{
         expand: true,
         cwd: 'app/',
-        src: ['**'],
+        src: ['**', '!bower_components/jasmine/**', '!bower_components/karma/**', '!bower_components/angular-mocks/**'],
         dest: 'dist/'
       }
     },
@@ -25,9 +25,11 @@ module.exports = function(grunt) {
   });
   
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-gh-pages');
   
   grunt.registerTask('default', [
+    'clean',
     'copy'
   ]);
   
