@@ -13,9 +13,7 @@
     "bootstrap": "3.x.x"
   },
   "devDependencies": {
-    "angular-mocks": "*",
-    "jasmine": "*",
-    "karma": "*"
+    "angular-mocks": "*"
   },
   "appPath": "app"
 }

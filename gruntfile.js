@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       main:{
         expand: true,
         cwd: 'app/',
-        src: ['**', '!bower_components/jasmine/**', '!bower_components/karma/**', '!bower_components/angular-mocks/**'],
+        src: ['**'],
         dest: 'dist/'
       }
     },
