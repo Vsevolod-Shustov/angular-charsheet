@@ -28,12 +28,20 @@ csDirectives.directive('d3js', function(){
     restrict: "A",
     template: '<script src="./js/vendor/d3.v3.min.js"></script>',
     link: function(scope, element, attrs){
-      var dataset = [ 5, 10, 15, 20, 25 ];
-      d3.select("#d3js").selectAll("p")
-        .data(dataset)
-        .enter()
-        .append("p")
-        .text(function(d) { return d; });
+      var dataset = [];                        //Initialize empty array
+      for (var i = 0; i < 25; i++) {           //Loop 25 times
+          var newNumber = Math.random() * 30;  //New random number (0-30)
+          dataset.push(newNumber);             //Add new number to array
+      }
+      d3.select("#d3js").selectAll("div")
+        .data(dataset)  // <-- The answer is here!
+    .enter()
+    .append("div")
+    .attr("class", "bar")
+    .style("height", function(d) {
+        var barHeight = d * 5;
+        return barHeight + "px";
+    });
       /*console.log(scope.character);
       var attributes = [];
       angular.forEach(scope.character.attributes, function(attribute){

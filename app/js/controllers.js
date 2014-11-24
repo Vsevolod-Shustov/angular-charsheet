@@ -12,6 +12,10 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   $scope.loadCharacter = function(){
     $scope.character = LocalStorageService.load('character');
   };
+  //delete save
+  $scope.deleteSave = function(){
+    LocalStorageService.clear('character');
+  };
   
   //list of bonus types
   $scope.bonusTypes = ['alchemical', 'armor', 'circumstance', 'competence', 'deflection', 'dodge', 'enhancement', 'inherent', 'insight', 'luck', 'morale', 'natural armor', 'profane', 'racial', 'resistance', 'sacred', 'shield', 'size', 'trait', 'untyped'];
@@ -244,7 +248,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     //Skills
     angular.forEach($scope.character.skills, function(item){
       item.statbonus = $scope.character.attributes[item.attribute].mod;
-      item.value = item.base + item.statbonus + item.bonus;
+      item.value = item.ranks + item.statbonus + item.bonus;
     });
     
     //Saves

@@ -29,9 +29,14 @@
 
 <div id="footer" class="row">
   <div class="col-xs-12">
-    <button type="submit" id="save-map-btn" class="btn btn-success" ng-click="saveCharacter()">Save Character</button>
-    <button type="submit" id="load-map-btn" class="btn btn-warning" ng-click="loadCharacter()">Load Character</button>
+    <button type="submit" id="save-btn" class="btn btn-default" ng-click="saveCharacter()">Save Character</button>
+    <button type="submit" id="load-btn" class="btn btn-default" ng-click="loadCharacter()">Load Character</button>
+    <button type="submit" id="load-btn" class="btn btn-warning" ng-click="deleteSave()">Delete Save Data</button>
+    <button type="submit" class="btn btn-default pull-right" ng-click="showjsondata = !showjsondata">Toggle JSON</button>
+  </div>
+  <div class="col-xs-12" ng-show="showjsondata">
     <pre>{{character | json}}</pre>
+    <pre>{{character}}</pre>
   </div>
 </div>
 </body>
