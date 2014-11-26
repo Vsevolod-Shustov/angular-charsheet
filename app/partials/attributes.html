@@ -8,7 +8,7 @@
     <div class="td">Bonus</div>
   </div>
   <div class="tr large" ng-repeat="attribute in character.attributes | toArray | orderBy:'index'">
-    <div class="td large inverted">{{attribute.name | uppercase | limitTo:3}}</div>
+    <div class="td large">{{attribute.name | uppercase | limitTo:3}}</div>
     <div class="td">{{attribute.value||10}}</div>
     <div class="td">{{attribute.mod||0}}</div>
     <div class="td"><input type="number" ng-model="attribute.basevalue" spinner></div>

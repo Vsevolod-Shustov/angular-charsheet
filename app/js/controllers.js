@@ -7,14 +7,17 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   //save character
   $scope.saveCharacter = function(){
     LocalStorageService.save('character', $scope.character);
+    console.log("character saved");
   };
   //load character
   $scope.loadCharacter = function(){
     $scope.character = LocalStorageService.load('character');
+    console.log("character loaded");
   };
   //delete save
   $scope.deleteSave = function(){
     LocalStorageService.clear('character');
+    console.log("save data cleared");
   };
   
   //list of bonus types
