@@ -1,16 +1,14 @@
-<div class="col-md-4" ng-include="'partials/attributes.html'"></div>
+<div class="row">
+  <div class="col-md-4" ng-include="'partials/attributes.html'"></div>
 
-<div class="col-md-4" ng-include="'partials/saves.html'"></div>
-
-<div class="col-md-4">
-<div class="header">Effects</div>
-  <div class="table table-bordered">  
-    <div class="tr" ng-repeat='item in character.items'>
-      <div class="td">
-        {{item.name}}
-        <input type="checkbox" ng-model="item.active">
-      </div>
-    </div> 
-    </div>
-  </div>
+  <div class="col-md-4">
+    <div ng-include="'partials/saves.html'"></div>
+    <div ng-include="'partials/movement.html'"></div>
+  </div>  
+    
+  <div class="col-md-4" ng-include="'partials/effects.html'"></div>
 </div>
+
+<!--<div class="row">
+  <div class="col-md-4" ng-include="'partials/movement.html'"></div>
+</div>-->
