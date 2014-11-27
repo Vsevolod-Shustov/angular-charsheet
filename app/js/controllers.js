@@ -56,6 +56,8 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   $scope.addEffect = function(targetgroup, target, type, value, source){
     source.effects[target] = new Effect(targetgroup, target, type.toLowerCase(), value);
+    $scope.addEffectForm = {};
+    $scope.addEffectForm.value = 0;
   };
   $scope.removeEffect = function(collection, target){
     delete collection[target];
@@ -223,13 +225,16 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     angular.forEach($scope.character.attributes, function(attr){
       attr.bonuses = {};
     });
+    angular.forEach($scope.character.movement, function(speed){
+      speed.bonuses = {};
+    });
     
     //Items
     angular.forEach($scope.character.items, function(item){
-      //console.log(item.effects);
+      console.log(item.effects);
       if(item.active == true){
         angular.forEach(item.effects, function(effect){
-          //console.log(effect);
+          console.log(effect);
           if(!$scope.character[effect.targetgroup][effect.target].bonuses[effect.type]){
             $scope.character[effect.targetgroup][effect.target].bonuses[effect.type] = new Bonus(item.name, effect.type, effect.value);
           } else if($scope.character[effect.targetgroup][effect.target].bonuses[effect.type].type == 'dodge' || 
