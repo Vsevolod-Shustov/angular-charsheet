@@ -73,6 +73,7 @@ input[type="number"] {
   text-align:center;
   outline:none;
   cursor:ns-resize;
+  background-color:inherit;
 }
 input[type="number"]::selection {
   background-color:#eee;
@@ -142,8 +143,7 @@ input[type="text"] {
 .header {
   font-weight:bold;
   text-align:center;
-  /*border:1px solid lightgray;
-  border-bottom:0;*/
+  border-bottom:1px solid #ccc;
   position:relative;
 }
 .glyphicon-cog {
@@ -164,4 +164,12 @@ input[type="checkbox"] {
 }
 pre {
   margin-top:20px;
+}
+.movement {
+  margin-top:4px;
+}
+section {
+  background:#eee;
+  border-radius:5px;
+  padding:2px 5px;
 }
