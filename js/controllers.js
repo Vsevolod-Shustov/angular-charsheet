@@ -7,10 +7,17 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   //save character
   $scope.saveCharacter = function(){
     LocalStorageService.save('character', $scope.character);
+    console.log("character saved");
   };
   //load character
   $scope.loadCharacter = function(){
     $scope.character = LocalStorageService.load('character');
+    console.log("character loaded");
+  };
+  //delete save
+  $scope.deleteSave = function(){
+    LocalStorageService.clear('character');
+    console.log("save data cleared");
   };
   
   //list of bonus types
@@ -30,6 +37,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     delete save.bonuses[bonus.name];
   };*/
   
+  //functions
   $scope.calculateBonuses = function(item){
     item.bonus = 0;
     angular.forEach(item.bonuses, function(bonus){
@@ -52,6 +60,12 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   $scope.removeEffect = function(collection, target){
     delete collection[target];
   };
+  
+  $scope.effectgroups = [
+    {name:'attributes'},
+    {name:'saves'},
+    {name:'movement'}
+  ];
   
   //items
   $scope.character.items = {};
@@ -172,9 +186,34 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     delete $scope.character.levels[index];
   };
   
+  //speed
+  $scope.character.movement = {};
+  function Speed(name, basevalue, index){
+    this.name = name;
+    this.basevalue = basevalue;
+    this.value = 0;
+    this.bonus = 0;
+    this.bonuses = {};
+    this.index = index;
+  };
+  
+  var speeds = [
+    {name:'land', basevalue:30, index:1},
+    {name:'fly', basevalue:0, index:2},
+    {name:'tele', basevalue:0, index:3},
+    {name:'swim', basevalue:0, index:4},
+    {name:'climb', basevalue:0, index:5}
+  ];
+  
+  angular.forEach(speeds, function(item){
+    $scope.character.movement[item.name] = new Speed(item.name, item.basevalue, item.index);
+  });
+  
   //update
+  $scope.$watch('character', function(){$scope.update()},true);
+  
   $scope.update = function(){
-    console.log('update started');
+    //console.log('update started');
     //reset
     angular.forEach($scope.character.saves, function(save){
       save.base = 0;
@@ -212,7 +251,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     //Skills
     angular.forEach($scope.character.skills, function(item){
       item.statbonus = $scope.character.attributes[item.attribute].mod;
-      item.value = item.base + item.statbonus + item.bonus;
+      item.value = item.ranks + item.statbonus + item.bonus;
     });
     
     //Saves
@@ -239,15 +278,13 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
       //console.log(save.name + ' base value is ' + parseInt(save.base));
     });
     
-    console.log('update finished');
-  };
-  
-  $scope.$watch('character', function(){$scope.update()},true);
-  
-  //functions
-  $scope.calculateBonuses = function(item){
-    angular.forEach(item.bonuses, function(bonus){
-      item.bonus += bonus.value;
+    //movement
+    angular.forEach($scope.character.movement, function(speed){
+      speed.bonus = 0;
+      $scope.calculateBonuses(speed);
+      speed.value = speed.basevalue + speed.bonus;
     });
+    
+    //console.log('update finished');
   };
 }]);

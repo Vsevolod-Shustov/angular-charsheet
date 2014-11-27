@@ -1,46 +1,63 @@
-<div class="header">Saves<span class="glyphicon glyphicon-cog" ng-click="showSavesSettings = !showSavesSettings"></span></div>
-<div class="table table-bordered">
-  <div class="tr">
-    <div class="td">Name</div>
-    <div class="td">Value</div>
-    <div class="td">Base</div>
-    <div class="td">Attribute</div>
-    <div class="td">Bonus</div>
-  </div>
-  <div class="tr large" ng-repeat="save in character.saves | toArray | orderBy:'index'">
-    <div class="td large inverted">{{save.name | uppercase}}</div>
-    <div class="td">{{save.value}}</div>
-    <div class="td">{{save.base | parseInt}}</div>
-    <div class="td">{{save.attribute | uppercase | limitTo:3}} {{save.statbonus||0}}</div>
-    <div class='td bonus-anchor' ng-click="show = !show">{{save.bonus}} <span class="glyphicon glyphicon-chevron-down"></span></div>
-    
-    <div class='td bonus-popup-container'>
-      <div class="popup-fixed table table-bordered" ng-show="show">
-        <span class="glyphicon glyphicon-remove-circle" ng-click="show = !show"></span>
-        <div class="tr">
-          <div class="td">Source</div>
-          <div class="td">Type</div>
-          <div class="td">Value</div>
-        </div>
-        <div class="tr large" ng-repeat="bonus in save.bonuses">
-          <div class="td">{{bonus.source}}</div>
-          <div class="td">{{bonus.type}}</div>
-          <div class="td">{{bonus.value}}</div>
+<section class="saves">
+  <div class="header">Saves<span class="glyphicon glyphicon-cog" ng-click="showSavesSettings = !showSavesSettings"></span></div>
+  <div class="table table-bordered">
+    <div class="tr">
+      <div class="td">Name</div>
+      <div class="td">Value</div>
+      <div class="td">Base</div>
+      <div class="td">Attribute</div>
+      <div class="td">Bonus</div>
+    </div>
+    <div class="tr large" ng-repeat="save in character.saves | toArray | orderBy:'index'">
+      <div class="td large">{{save.name | uppercase}}</div>
+      <div class="td">{{save.value}}</div>
+      <div class="td">{{save.base | parseInt}}</div>
+      <div class="td">{{save.attribute | uppercase | limitTo:3}} {{save.statbonus||0}}</div>
+      <div class='td bonus-anchor' ng-click="show = !show">{{save.bonus}} <span class="glyphicon glyphicon-chevron-down"></span></div>
+      
+      <div class='td bonus-popup-container'>
+        <div class="popup-fixed table table-bordered" ng-show="show">
+          <span class="glyphicon glyphicon-remove-circle" ng-click="show = !show"></span>
+          <div class="tr">
+            <div class="td">Source</div>
+            <div class="td">Type</div>
+            <div class="td">Value</div>
+          </div>
+          <div class="tr large" ng-repeat="bonus in save.bonuses">
+            <div class="td">{{bonus.source}}</div>
+            <div class="td">{{bonus.type}}</div>
+            <div class="td">{{bonus.value}}</div>
+          </div>
         </div>
       </div>
+      
     </div>
-    
   </div>
-</div>
+</section>
 
-<div class="popup-fixed table table-bordered" ng-show="showSavesSettings">
+<section class="movement">
+  <div class="header">Movement</div>
+  <div class="table table-bordered">
+    <div class="tr">
+      <div class="td" ng-repeat="speed in character.movement | toArray | orderBy:'index'">{{speed.name}}</div>
+    </div>
+    <div class="tr">
+      <div class="td" ng-repeat="speed in character.movement | toArray | orderBy:'index'">{{speed.value}}</div>
+    </div>
+  </div>
+</section>
+
+<div class="popup-fixed" ng-show="showSavesSettings">
   <span class="glyphicon glyphicon-remove-circle" ng-click="showSavesSettings = !showSavesSettings"></span>
-  <div class="tr large" ng-repeat="save in character.saves">
-    <div class="td">{{save.name | uppercase}}</div>
-    <div class="td">
-      <select ng-model="save.attribute" ng-options="value.name as value.name for (key , value) in character.attributes | toArray | orderBy:'index'">
-        <!--<option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">{{attribute.name}}</option>-->
-      </select>
+  <div class="header">Save attribute dependency</div>
+  <div class="table table-bordered">
+    <div class="tr large" ng-repeat="save in character.saves">
+      <div class="td">{{save.name | uppercase}}</div>
+      <div class="td">
+        <select ng-model="save.attribute" ng-options="value.name as value.name for (key , value) in character.attributes | toArray | orderBy:'index'">
+          <!--<option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">{{attribute.name}}</option>-->
+        </select>
+      </div>
     </div>
   </div>
 </div>

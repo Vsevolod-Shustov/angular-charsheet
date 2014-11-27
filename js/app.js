@@ -30,6 +30,9 @@ csApp.config(function($routeProvider) {
     when('/levels', {
       templateUrl: 'partials/levels.html'
     }).
+    when('/graphs', {
+      templateUrl: 'partials/graphs.html'
+    }).
     when('/items', {
       templateUrl: 'partials/items.html'
     });

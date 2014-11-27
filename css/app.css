@@ -35,11 +35,19 @@ input[type=number]::-webkit-outer-spin-button {
   display:table;
   border:none;
   border-collapse:collapse;
+  position:relative;
+  margin-bottom:0;
 }
 .tr {
   display:table-row;
   position:relative;
 }
+/*.table-bordered .tr {
+  border-bottom:1px solid #ddd;
+}
+.table-bordered .tr:last-of-type {
+  border-bottom:0;
+}*/
 .fullwidth {
   width:100%;
   text-align:center;
@@ -53,7 +61,7 @@ input[type=number]::-webkit-outer-spin-button {
   vertical-align:middle!important;
   font-size:inherit;
   position:relative;
-  border:1px solid lightgray;
+  /*border:1px solid lightgray;*/
 }
 .td:first-letter {
   text-transform:uppercase;
@@ -65,6 +73,7 @@ input[type="number"] {
   text-align:center;
   outline:none;
   cursor:ns-resize;
+  background-color:inherit;
 }
 input[type="number"]::selection {
   background-color:#eee;
@@ -92,11 +101,6 @@ input[type="text"] {
   color:#0e0;
 }*/
 
-.table {
-  position:relative;
-  background:white;
-  margin-bottom:0;
-}
 .bonus-anchor {
   position:relative;
   cursor:pointer;
@@ -104,10 +108,14 @@ input[type="text"] {
 }
 .popup-fixed {
   position:fixed;
-  bottom:30px;
-  right:30px;
+  bottom:15px;
+  right:15px;
   z-index:10;
-  width:480px;
+  width:290px;
+  padding:5px;
+  background:#eee!important;
+  border-radius:5px;
+  border-collapse:separate;
 }
 .bonus-popup-container {
   padding:0!important;
@@ -135,8 +143,7 @@ input[type="text"] {
 .header {
   font-weight:bold;
   text-align:center;
-  border:1px solid lightgray;
-  border-bottom:0;
+  border-bottom:1px solid #ccc;
   position:relative;
 }
 .glyphicon-cog {
@@ -154,4 +161,15 @@ input[type="checkbox"] {
   right:4px;
   top:4px;
   margin-left:8px;
+}
+pre {
+  margin-top:20px;
+}
+.movement {
+  margin-top:4px;
+}
+section {
+  background:#eee;
+  border-radius:5px;
+  padding:2px 5px;
 }
