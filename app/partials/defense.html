@@ -1,0 +1,11 @@
+<section class="misc">
+  <div class="header">Defense</div>
+  <div class="table table-bordered">
+    <div class="tr">
+      <div class="td" ng-repeat="item in character.defense">{{item.name}}</div>
+    </div>
+    <div class="tr">
+      <div class="td" ng-repeat="item in character.defense">{{item.value | number:0}}</div>
+    </div>
+  </div>
+</section>

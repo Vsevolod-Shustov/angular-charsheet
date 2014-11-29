@@ -29,13 +29,6 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     this.source = source;
     this.value = value;
   };
-  /*$scope.addBonus = function(source, name, value){
-    console.log('attempting to set '+name+' bonus of '+target.name+' to '+value);
-    target.bonuses[name.toLowerCase()] = new Bonus(name.toLowerCase(), source, value);
-  };
-  $scope.removeBonus = function(target, bonus){
-    delete save.bonuses[bonus.name];
-  };*/
   
   //functions
   $scope.calculateBonuses = function(item){
@@ -66,7 +59,9 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   $scope.effectgroups = [
     {name:'attributes'},
     {name:'saves'},
-    {name:'movement'}
+    {name:'movement'},
+    {name:'misc'},
+    {name:'defense'}
   ];
   
   //items
@@ -211,6 +206,40 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     $scope.character.movement[item.name] = new Speed(item.name, item.basevalue, item.index);
   });
   
+  //misc
+  $scope.character.misc = {};
+  $scope.character.misc.bab = {
+    "name": "bab",
+    "value": 0
+  };
+  $scope.character.misc.cmb = {
+    "name": "cmb",
+    "value": 0,
+    "bonus": 0,
+    "bonuses": {}
+  };
+  function attack(){
+    this.name = name;
+    this.value = 0;
+    this.bonus = 0;
+    this.bonuses = {};
+  };
+  
+  //defense
+  $scope.character.defense = {};
+  function AC(name, attribute){
+    this.name = name;
+    this.attribute = attribute;
+    this.base = 10;
+    this.value = 0;
+    this.bonus = 0;
+    this.bonuses = {};
+  };
+  
+  $scope.character.defense.ac = new AC('ac', 'dexterity');
+  $scope.character.defense.touch = new AC('touch', 'dexterity');
+  $scope.character.defense.ff = new AC('ff', 'dexterity');
+  
   //update
   $scope.$watch('character', function(){$scope.update()},true);
   
@@ -220,21 +249,28 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     angular.forEach($scope.character.saves, function(save){
       save.base = 0;
       save.firsthighbonus = 0;
+      save.bonus = 0;
       save.bonuses = {};
     });
     angular.forEach($scope.character.attributes, function(attr){
+      attr.bonus = 0;
       attr.bonuses = {};
     });
     angular.forEach($scope.character.movement, function(speed){
+      speed.bonus = 0;
       speed.bonuses = {};
+    });
+    angular.forEach($scope.character.defense, function(defense){
+      defense.bonus = 0;
+      defense.bonuses = {};
     });
     
     //Items
     angular.forEach($scope.character.items, function(item){
-      console.log(item.effects);
+      //console.log(item.effects);
       if(item.active == true){
         angular.forEach(item.effects, function(effect){
-          console.log(effect);
+          //console.log(effect);
           if(!$scope.character[effect.targetgroup][effect.target].bonuses[effect.type]){
             $scope.character[effect.targetgroup][effect.target].bonuses[effect.type] = new Bonus(item.name, effect.type, effect.value);
           } else if($scope.character[effect.targetgroup][effect.target].bonuses[effect.type].type == 'dodge' || 
@@ -247,7 +283,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     
     //Attributes
     angular.forEach($scope.character.attributes, function(attribute){
-      attribute.bonus = 0;
+      //attribute.bonus = 0;
       $scope.calculateBonuses(attribute);
       attribute.value = attribute.basevalue + attribute.bonus;
       attribute.mod = parseInt((attribute.value - 10)/2);
@@ -275,7 +311,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     });
     //calculate save bonus
     angular.forEach($scope.character.saves, function(save){
-      save.bonus = 0;
+      //save.bonus = 0;
       $scope.calculateBonuses(save);
       save.statbonus = $scope.character.attributes[save.attribute].mod;
       if(save.firsthighbonus){save.base += save.firsthighbonus};
@@ -285,10 +321,51 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     
     //movement
     angular.forEach($scope.character.movement, function(speed){
-      speed.bonus = 0;
+      //speed.bonus = 0;
       $scope.calculateBonuses(speed);
       speed.value = speed.basevalue + speed.bonus;
     });
+    
+    //BAB
+    $scope.character.misc.bab.value = 0;
+    angular.forEach($scope.character.levels, function(level){
+      //console.log(level.index);
+      switch(level["bab"]){
+        case "good":
+          $scope.character.misc.bab.value += 1;
+          break;
+        case "medium":
+          $scope.character.misc.bab.value += 0.75;
+          break;
+        default:
+          $scope.character.misc.bab.value += 0.5;
+      };
+    });
+    
+    //CMB
+    $scope.calculateBonuses($scope.character.misc.cmb);
+    $scope.character.misc.cmb.value = $scope.character.misc.bab.value + $scope.character.attributes.strength.mod + $scope.character.misc.cmb.bonus;
+    
+    //AC
+    $scope.calculateBonuses($scope.character.defense.ac);
+    $scope.character.defense.ac.value =
+      $scope.character.defense.ac.base + 
+      $scope.character.defense.ac.bonus + 
+      $scope.character.attributes[$scope.character.defense.ac.attribute].mod;
+    
+    //touch
+    angular.copy($scope.character.defense.ac.bonuses, $scope.character.defense.touch.bonuses);
+    angular.forEach($scope.character.defense.touch.bonuses, function(bonus){
+      if(bonus.type == 'armor' || bonus.type == 'shield' || bonus.type == 'natural armor'){
+        delete $scope.character.defense.touch.bonuses[bonus.type];
+      };
+    });
+    $scope.calculateBonuses($scope.character.defense.touch);
+    $scope.character.defense.touch.value =
+      $scope.character.defense.touch.base + 
+      $scope.character.defense.touch.bonus + 
+      $scope.character.attributes[$scope.character.defense.touch.attribute].mod;
+      
     
     //console.log('update finished');
   };

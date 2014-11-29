@@ -165,11 +165,9 @@ input[type="checkbox"] {
 pre {
   margin-top:20px;
 }
-.movement {
-  margin-top:4px;
-}
 section {
   background:#eee;
   border-radius:5px;
   padding:2px 5px;
+  margin-bottom:20px;
 }
