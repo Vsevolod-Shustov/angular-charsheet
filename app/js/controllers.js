@@ -227,18 +227,27 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   
   //defense
   $scope.character.defense = {};
-  function AC(name, attribute){
+  function AC(name, attribute, index){
     this.name = name;
     this.attribute = attribute;
     this.base = 10;
     this.value = 0;
     this.bonus = 0;
     this.bonuses = {};
+    this.index = index;
   };
   
-  $scope.character.defense.ac = new AC('ac', 'dexterity');
-  $scope.character.defense.touch = new AC('touch', 'dexterity');
-  $scope.character.defense.ff = new AC('ff', 'dexterity');
+  $scope.character.defense.ac = new AC('ac', 'dexterity', 1);
+  $scope.character.defense.touch = new AC('touch', 'dexterity', 2);
+  $scope.character.defense.ff = new AC('ff', 'dexterity', 3);
+  
+  $scope.character.defense.cmd = {
+    "name": "cmd",
+    "value": 0,
+    "bonus": 0,
+    "bonuses": {},
+    "index": 4
+  };
   
   //update
   $scope.$watch('character', function(){$scope.update()},true);
@@ -355,8 +364,10 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     
     //touch
     angular.copy($scope.character.defense.ac.bonuses, $scope.character.defense.touch.bonuses);
+    var touchBonuses = ['armor','shield','natural armor']
     angular.forEach($scope.character.defense.touch.bonuses, function(bonus){
-      if(bonus.type == 'armor' || bonus.type == 'shield' || bonus.type == 'natural armor'){
+      //if(bonus.type == 'armor' || bonus.type == 'shield' || bonus.type == 'natural armor'){
+      if(touchBonuses.indexOf(bonus.type) > -1){
         delete $scope.character.defense.touch.bonuses[bonus.type];
       };
     });
@@ -366,6 +377,15 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
       $scope.character.defense.touch.bonus + 
       $scope.character.attributes[$scope.character.defense.touch.attribute].mod;
       
+    //ff
+    angular.copy($scope.character.defense.ac.bonuses, $scope.character.defense.ff.bonuses);
+    delete $scope.character.defense.ff.bonuses['dodge'];
+    $scope.calculateBonuses($scope.character.defense.ff);
+    $scope.character.defense.ff.value =
+      $scope.character.defense.ff.base + 
+      $scope.character.defense.ff.bonus;
+    
+    $scope.character.defense.cmd.value = $scope.character.defense.touch.value + $scope.character.strngth.mod;
     
     //console.log('update finished');
   };

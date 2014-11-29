@@ -2,10 +2,10 @@
   <div class="header">Defense</div>
   <div class="table table-bordered">
     <div class="tr">
-      <div class="td" ng-repeat="item in character.defense">{{item.name}}</div>
+      <div class="td" ng-repeat="item in character.defense | toArray | orderBy:'index'">{{item.name | uppercase}}</div>
     </div>
     <div class="tr">
-      <div class="td" ng-repeat="item in character.defense">{{item.value | number:0}}</div>
+      <div class="td" ng-repeat="item in character.defense | toArray | orderBy:'index'">{{item.value | number:0}}</div>
     </div>
   </div>
 </section>
