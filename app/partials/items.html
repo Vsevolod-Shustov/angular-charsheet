@@ -5,16 +5,16 @@
     {{item.name}}
     <span class="glyphicon glyphicon-cog" ng-click="addItemEffectShow = !addItemEffectShow"></span>
   </div>
-  <div class="table table-bordered">
-    <div class="tr" ng-repeat="effect in item.effects">
-      <div class="td">{{effect.target}}</div>
-      <div class="td">{{effect.type}}</div>
-      <div class="td">{{effect.value}}</div>
-      <div class="td"><span class="glyphicon glyphicon-remove" ng-click="removeEffect(item.effects, effect.target)"></span></div>
-    </div>
+  <table class="table">
+    <tr ng-repeat="effect in item.effects">
+      <td>{{effect.target}}
+      <td>{{effect.type}}
+      <td>{{effect.value}}
+      <td><span class="glyphicon glyphicon-remove" ng-click="removeEffect(item.effects, effect.target)"></span>
+    </tr>
   
-    <div class="tr large" ng-hide="!addItemEffectShow">
-      <div class="td">
+    <tr class="large" ng-hide="!addItemEffectShow">
+      <td>
         <select ng-model="addEffectForm.targetGroup">
           <option ng-repeat="group in effectgroups" value="{{group.name}}">{{group.name}}</option>
         </select>
@@ -23,23 +23,21 @@
             {{stat.name}}
           </option>
         </select>
-      </div>
-      <div class="td">
+      </td>
+      <td>
         <select ng-model="addEffectForm.type" placeholder="Bonus Type">
           <option ng-repeat="type in bonusTypes" value="{{type}}">
             {{type}}
           </option>
         </select>
-      </div>
-      <div class="td"><input type="number" ng-model="addEffectForm.value" spinner></div>
-      <div class="td"><span class="glyphicon glyphicon-plus" ng-click="addEffect(addEffectForm.targetGroup, addEffectForm.target, addEffectForm.type, addEffectForm.value, item)"></span></div>
-    </div>
-  </div>
+      </td>
+      <td><input type="number" ng-model="addEffectForm.value" spinner>
+      <td><span class="glyphicon glyphicon-plus" ng-click="addEffect(addEffectForm.targetGroup, addEffectForm.target, addEffectForm.type, addEffectForm.value, item)"></span>
+    </tr>
+  </table>
 </section>
-<div class="tr">
-  <div class="td"><input type="text" ng-model="addItemForm.name" placeholder="Item Name"></div>&nbsp;
-  <div class="td"><button class="btn btn-default" ng-click="addItem(addItemForm.name)">Add Item</button></div>&nbsp;
-  <div class="td"><button class="btn btn-default" ng-click="addItemEffectShow = !addItemEffectShow">Toggle add item properties form</button></div>
-</div>
-</div>
+<tr>
+  <td><input type="text" ng-model="addItemForm.name" placeholder="Item Name">&nbsp;
+  <td><button class="btn btn-default" ng-click="addItem(addItemForm.name)">Add Item</button>&nbsp;
+  <td><button class="btn btn-default" ng-click="addItemEffectShow = !addItemEffectShow">Toggle add item properties form</button>
 </div>

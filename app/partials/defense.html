@@ -1,11 +1,9 @@
 <section class="misc">
   <div class="header">Defense</div>
-  <div class="table table-bordered">
-    <div class="tr">
-      <div class="td" ng-repeat="item in character.defense | toArray | orderBy:'index'">{{item.name | uppercase}}</div>
-    </div>
-    <div class="tr">
-      <div class="td" ng-repeat="item in character.defense | toArray | orderBy:'index'">{{item.value | number:0}}</div>
-    </div>
-  </div>
+  <table class="table">
+    <tr>
+      <td ng-repeat="item in character.defense | toArray | orderBy:'index'">{{item.name | uppercase}}
+    <tr>
+      <td ng-repeat="item in character.defense | toArray | orderBy:'index'">{{item.value | number:0}}</div>
+  </table>
 </section>

@@ -31,39 +31,28 @@ input[type=number]::-webkit-outer-spin-button {
   font-size:12px;
 }
 
-.table {
-  display:table;
-  border:none;
-  border-collapse:collapse;
+table {
   position:relative;
-  margin-bottom:0;
+  margin-bottom:0!important;
 }
-.tr {
-  display:table-row;
+tr {
   position:relative;
 }
-/*.table-bordered .tr {
-  border-bottom:1px solid #ddd;
+tr:first-of-type td {
+  border:0!important;
 }
-.table-bordered .tr:last-of-type {
-  border-bottom:0;
-}*/
 .fullwidth {
   width:100%;
   text-align:center;
 }
-.td {
-  display:table-cell;
-  padding:0;
-  line-height:30px;
-  height:30px!important;
+td {
   text-align:center!important;
   vertical-align:middle!important;
   font-size:inherit;
   position:relative;
-  /*border:1px solid lightgray;*/
+  padding:2px!important;
 }
-.td:first-letter {
+td:first-letter {
   text-transform:uppercase;
 }
 input[type="number"] {
@@ -143,9 +132,14 @@ input[type="text"] {
 .header {
   font-weight:bold;
   text-align:center;
-  border-bottom:1px solid #ccc;
+  /*border-bottom:1px solid #ccc;*/
   position:relative;
 }
+.header,
+.header td {
+  border:0!important;
+}
+
 .glyphicon-cog {
   position:absolute;
   right:4px;
