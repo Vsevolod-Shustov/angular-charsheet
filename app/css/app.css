@@ -41,10 +41,6 @@ tr {
 tr:first-of-type td {
   border:0!important;
 }
-.fullwidth {
-  width:100%;
-  text-align:center;
-}
 td {
   text-align:center!important;
   vertical-align:middle!important;
@@ -95,39 +91,12 @@ input[type="text"] {
   cursor:pointer;
   -webkit-user-select: none;
 }
-.popup-fixed {
-  position:fixed;
-  bottom:15px;
-  right:15px;
-  z-index:10;
-  width:290px;
-  padding:5px;
-  background:#eee!important;
-  border-radius:5px;
-  border-collapse:separate;
-}
-.bonus-popup-container {
-  padding:0!important;
-  border:0!important;
-  position:relative;
-  width:0px;
-}
 .glyphicon-chevron-down,
 .glyphicon-resize-vertical {
   position:absolute;
   top:2px;
   right:2px;
   font-size:10px;
-}
-.glyphicon-remove-circle {
-  position:absolute;
-  font-size:24px;
-  top:-0.5em;
-  right:-0.5em;
-  display:block;
-  z-index:9000;
-  background:white;
-  border-radius:12px;
 }
 .header {
   font-weight:bold;
@@ -164,4 +133,9 @@ section {
   border-radius:5px;
   padding:2px 5px;
   margin-bottom:20px;
+}
+
+.modal-open {
+  overflow-y: auto;
+  padding:0!important;
 }

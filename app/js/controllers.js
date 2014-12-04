@@ -412,8 +412,8 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
         $scope.character.defense.ff.base + 
         $scope.character.defense.ff.bonus;
       
-      //CMB
-      $scope.character.defense.cmd.value = $scope.character.defense.touch.value + $scope.character.attributes.strength.mod;
+      //CMD
+      $scope.character.defense.cmd.value = $scope.character.defense.touch.value + $scope.character.attributes.strength.mod + $scope.character.offense.bab.value;
     
     //console.log('update finished');
   };

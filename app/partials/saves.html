@@ -13,23 +13,28 @@
       <td>{{save.value}}
       <td>{{save.base | parseInt}}
       <td>{{save.attribute | uppercase | limitTo:3}} {{save.statbonus||0}}
-      <td class='bonus-anchor' ng-click="show = !show">{{save.bonus}} <span class="glyphicon glyphicon-chevron-down"></span></td>
+      <td class='bonus-anchor' data-modal="modal-{{save.name}}" modaltoggle>{{save.bonus}} <span class="glyphicon glyphicon-chevron-down"></span></td>
       
       <td class='bonus-popup-container'>
-        <table class="popup-fixed table" ng-show="show">
-          <tr class="glyphicon glyphicon-remove-circle" ng-click="show = !show"></tr>
-          <tr class="header"><td colspan="3">{{save.name | uppercase}} breakdown</td></tr>
-          <tr>
-            <td>Source</td>
-            <td>Type</td>
-            <td>Value</td>
-          </tr>
-          <tr class="large" ng-repeat="bonus in save.bonuses">
-            <td>{{bonus.source}}</td>
-            <td>{{bonus.type}}</td>
-            <td>{{bonus.value}}</td>
-          </tr>
-        </table>
+        <div class="modal fade" id="modal-{{save.name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <table class="table">
+                <tr class="header"><td colspan="3">{{save.name | uppercase}} breakdown</td></tr>
+                <tr>
+                  <td>Source</td>
+                  <td>Type</td>
+                  <td>Value</td>
+                </tr>
+                <tr class="large" ng-repeat="bonus in save.bonuses">
+                  <td>{{bonus.source}}</td>
+                  <td>{{bonus.type}}</td>
+                  <td>{{bonus.value}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
       </td>
       
     </tr>
