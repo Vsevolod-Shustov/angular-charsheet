@@ -12,8 +12,22 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   //load character
   $scope.loadCharacter = function(){
-    $scope.character = LocalStorageService.load('character');
-    console.log("character loaded");
+    var testChar = $scope.character;
+    //console.log(testChar);
+    var loadedChar = LocalStorageService.load('character');
+    //console.log(loadedChar);
+    angular.forEach(testChar, function(value, key){
+      //console.log(key);
+      if(!loadedChar[key]){
+        //console.log(key + ' not found in save data, loading default');
+        loadedChar[key] = value;
+        //console.log(loadedChar.key);
+      } else {
+        //console.log(key + ' found in save data');
+      };
+    });
+    $scope.character = loadedChar;
+    //console.log("character loaded");
   };
   //delete save
   $scope.deleteSave = function(){
@@ -39,47 +53,9 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     });
   };
   
-  $scope.initializeCharacter = function(){
-    //effects
-    $scope.addEffectForm = {};
-    $scope.addEffectForm.value = 0;
-
-    //items
-    $scope.character.items = {};
-    
-    //attributes
-    $scope.character.attributes = {};
-    
-    //skills
-    $scope.character.skills = {};
-    $scope.addSkillForm = {};
-    
-    //saves
-    $scope.character.saves = {};
-    
-    //levels
-    $scope.character.levels = {};
-    
-    //speed
-    $scope.character.movement = {};
-    
-    //defense
-    $scope.character.defense = {};
-    $scope.character.defense.cmd = {
-      "name": "cmd",
-      "value": 0,
-      "bonus": 0,
-      "bonuses": {},
-      "index": 4
-    };
-    
-    //offense
-    $scope.character.offense = {};
-  };
-  
-  $scope.initializeCharacter();
-  
   //effects
+  $scope.addEffectForm = {};
+  $scope.addEffectForm.value = 0;
   function Effect(targetgroup, target, type, value){
     this.targetgroup = targetgroup;
     this.target = target;
@@ -104,6 +80,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   ];
   
   //items
+  $scope.character.items = {};$scope.character.test = {};
   function Item(name){
     this.name = name;
     this.effects = {};
@@ -114,6 +91,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   
   //attributes
+  $scope.character.attributes = {};
   function Attribute(name, index){
     this.name = name;
     this.basevalue = 10;
@@ -138,6 +116,8 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   });
   
   //skills
+  $scope.character.skills = {};
+  $scope.addSkillForm = {};
   function Skill(name, attribute){
     this.name = name;
     this.attribute = attribute;
@@ -152,6 +132,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   
   //saves
+  $scope.character.saves = {};
   function Save(name,attribute,index){
     this.name = name;
     this.attribute = attribute;
@@ -173,6 +154,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   });
   
   //levels
+  $scope.character.levels = {};
   $scope.addLevelForm = {
     'index':1,
     'name':'bard',
@@ -213,6 +195,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   };
   
   //speed
+  $scope.character.movement = {};
   function Speed(name, basevalue, index){
     this.name = name;
     this.basevalue = basevalue;
@@ -235,6 +218,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   });
   
   //offense
+  $scope.character.offense = {};
   $scope.character.offense.bab = {
     "name": "bab",
     "value": 0
@@ -245,6 +229,7 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     "bonus": 0,
     "bonuses": {}
   };
+  
   function Attack(name){
     this.name = name;
     this.value = 0;
@@ -255,6 +240,15 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
   
   
   //defense
+  $scope.character.defense = {};
+  $scope.character.defense.cmd = {
+    "name": "cmd",
+    "value": 0,
+    "bonus": 0,
+    "bonuses": {},
+    "index": 4
+  };
+  
   function AC(name, attribute, index){
     this.name = name;
     this.attribute = attribute;
@@ -264,7 +258,6 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
     this.bonuses = {};
     this.index = index;
   };
-  
   $scope.character.defense.ac = new AC('ac', 'dexterity', 1);
   $scope.character.defense.touch = new AC('touch', 'dexterity', 2);
   $scope.character.defense.ff = new AC('ff', 'dexterity', 3);
