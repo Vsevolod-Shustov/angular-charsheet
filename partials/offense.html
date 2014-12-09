@@ -1,0 +1,9 @@
+<section class="offense">
+  <div class="header">Offense</div>
+  <table class="table">
+    <tr>
+      <td ng-repeat="item in character.offense">{{item.name | uppercase}}
+    <tr>
+      <td ng-repeat="item in character.offense">{{item.value | number:0}}
+  </table>
+</section>

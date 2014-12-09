@@ -1,0 +1,9 @@
+<section class="misc">
+  <div class="header">Defense</div>
+  <table class="table">
+    <tr>
+      <td ng-repeat="item in character.defense | toArray | orderBy:'index'">{{item.name | uppercase}}
+    <tr>
+      <td ng-repeat="item in character.defense | toArray | orderBy:'index'">{{item.value | number:0}}</div>
+  </table>
+</section>

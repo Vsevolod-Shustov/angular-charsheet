@@ -1,11 +1,9 @@
 <section class="movement">
   <div class="header">Movement</div>
-  <div class="table table-bordered">
-    <div class="tr">
-      <div class="td" ng-repeat="speed in character.movement | toArray | orderBy:'index'">{{speed.name}}</div>
-    </div>
-    <div class="tr">
-      <div class="td" ng-repeat="speed in character.movement | toArray | orderBy:'index'">{{speed.value}}</div>
-    </div>
-  </div>
+  <table class="table">
+    <tr>
+      <td ng-repeat="speed in character.movement | toArray | orderBy:'index'">{{speed.name}}
+    <tr>
+      <td ng-repeat="speed in character.movement | toArray | orderBy:'index'">{{speed.value}}
+  </table>
 </section>

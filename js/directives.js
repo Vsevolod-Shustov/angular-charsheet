@@ -77,3 +77,15 @@ csDirectives.directive('d3js', function(){
     }
   }
 });
+
+csDirectives.directive('modaltoggle', function(){
+  return {
+    restrict: "A",
+    link: function(scope, element, attrs){
+      element.on('click', function(){
+        angular.element("#"+attrs.modal).modal('toggle');
+        //console.log(attrs);
+      });
+    }
+  }
+});

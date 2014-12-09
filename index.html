@@ -14,29 +14,33 @@
   <script src="js/services.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
-<body ng-controller="characterCtrl" class="container">
-<div id="header" class="row">
-  <div class="col-xs-12">
-    <a class="btn btn-default" href="#/main">Main</a>
-    <a class="btn btn-default" href="#/skills">Skills</a>
-    <a class="btn btn-default" href="#/items">Items</a>
-    <a class="btn btn-default" href="#/levels">Levels</a>
-    <a class="btn btn-default pull-right" href="#/graphs">Graphs</a>
-  </div>
-</div>
+<body ng-controller="characterCtrl">
+<div class="page-container">
+  <div class="container">
+    <div id="header" class="row">
+      <div class="col-xs-12">
+        <a class="btn btn-default" href="#/main">Main</a>
+        <a class="btn btn-default" href="#/skills">Skills</a>
+        <a class="btn btn-default" href="#/items">Items</a>
+        <a class="btn btn-default" href="#/levels">Levels</a>
+        <a class="btn btn-default pull-right" href="#/graphs">Graphs</a>
+      </div>
+    </div>
 
-<div ng-view></div>
+    <div ng-view></div>
 
-<div id="footer" class="row">
-  <div class="col-xs-12">
-    <button type="submit" id="save-btn" class="btn btn-default" ng-click="saveCharacter()">Save Character</button>
-    <button type="submit" id="load-btn" class="btn btn-default" ng-click="loadCharacter()">Load Character</button>
-    <button type="submit" id="load-btn" class="btn btn-warning" ng-click="deleteSave()">Delete Save Data</button>
-    <button type="submit" class="btn btn-default pull-right" ng-click="showjsondata = !showjsondata">Toggle JSON</button>
-  </div>
-  <div class="col-xs-12" ng-show="showjsondata">
-    <pre>{{character | json}}</pre>
-    <pre>{{character}}</pre>
+    <div id="footer" class="row">
+      <div class="col-xs-12">
+        <button type="submit" id="save-btn" class="btn btn-default" ng-click="saveCharacter()">Save Character</button>
+        <button type="submit" id="load-btn" class="btn btn-default" ng-click="loadCharacter()">Load Character</button>
+        <button type="submit" id="load-btn" class="btn btn-warning" ng-click="deleteSave()">Delete Save Data</button>
+        <button type="submit" class="btn btn-default pull-right" ng-click="showjsondata = !showjsondata">Toggle JSON</button>
+      </div>
+      <div class="col-xs-12" ng-show="showjsondata">
+        <pre>{{character | json}}</pre>
+        <pre>{{character}}</pre>
+      </div>
+    </div>
   </div>
 </div>
 </body>
