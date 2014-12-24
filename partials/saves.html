@@ -1,5 +1,5 @@
 <section class="saves">
-  <div class="header">Saves<span class="glyphicon glyphicon-cog" ng-click="showSavesSettings = !showSavesSettings"></span></div>
+  <div class="header">Saves<span class="glyphicon glyphicon-cog" data-modal="modal-savesettings" modaltoggle></span></div>
   <table class="table">
     <tr>
       <td>Name
@@ -16,7 +16,7 @@
       <td class='bonus-anchor' data-modal="modal-{{save.name}}" modaltoggle>{{save.bonus}} <span class="glyphicon glyphicon-chevron-down"></span></td>
       
       <td class='bonus-popup-container'>
-        <div class="modal fade" id="modal-{{save.name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="modal-{{save.name}}" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <table class="table">
@@ -41,16 +41,19 @@
   </table>
 </section>
 
-<div class="popup-fixed" ng-show="showSavesSettings">
-  <span class="glyphicon glyphicon-remove-circle" ng-click="showSavesSettings = !showSavesSettings"></span>
-  <div class="header">Save attribute dependency</div>
-  <table class="table">
-    <tr class="large" ng-repeat="save in character.saves">
-      <td>{{save.name | uppercase}}
-      <td>
-        <select ng-model="save.attribute" ng-options="value.name as value.name for (key , value) in character.attributes | toArray | orderBy:'index'">
-          <!--<option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">{{attribute.name}}</option>-->
-        </select>
-    </tr>
-  </table>
+<div class="modal fade" id="modal-savesettings" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="header">Save attribute dependency</div>
+      <table class="table">
+        <tr class="large" ng-repeat="save in character.saves">
+          <td>{{save.name | uppercase}}
+          <td>
+            <select ng-model="save.attribute" ng-options="value.name as value.name for (key , value) in character.attributes | toArray | orderBy:'index'">
+              <!--<option ng-repeat="attribute in character.attributes" value="{{attribute.name}}">{{attribute.name}}</option>-->
+            </select>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>
