@@ -1,7 +1,7 @@
 "use strict";
 var csControllers = angular.module('csControllers', []);
 
-csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', function($scope, LocalStorageService){
+csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', '$location', function($scope, LocalStorageService, $location){
   $scope.character = {};
   
 
@@ -416,5 +416,10 @@ csControllers.controller('characterCtrl', ['$scope', 'LocalStorageService', func
       $scope.character.defense.cmd.value = $scope.character.defense.touch.value + $scope.character.attributes.strength.mod + $scope.character.offense.bab.value;
     
     //console.log('update finished');
+  };
+  
+  $scope.isActive = function (viewLocation) {
+    var active = (viewLocation === $location.path());
+    return active;
   };
 }]);

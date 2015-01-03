@@ -19,11 +19,11 @@
   <div class="container">
     <div id="header" class="row">
       <div class="col-xs-12">
-        <a class="btn btn-default" href="#/main">Main</a>
-        <a class="btn btn-default" href="#/skills">Skills</a>
-        <a class="btn btn-default" href="#/items">Items</a>
-        <a class="btn btn-default" href="#/levels">Levels</a>
-        <a class="btn btn-default pull-right" href="#/graphs">Graphs</a>
+        <a class="btn btn-default" ng-class="{active: isActive('/main')}" href="#/main">Main</a>
+        <a class="btn btn-default" ng-class="{active: isActive('/skills')}" href="#/skills">Skills</a>
+        <a class="btn btn-default" ng-class="{active: isActive('/items')}" href="#/items">Items</a>
+        <a class="btn btn-default" ng-class="{active: isActive('/levels')}" href="#/levels">Levels</a>
+        <a class="btn btn-default pull-right" ng-class="{active: isActive('/graphs')}" href="#/graphs">Graphs</a>
       </div>
     </div>
 
